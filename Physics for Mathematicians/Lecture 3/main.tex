@@ -1,0 +1,173 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians}
+\author{Seth Hoisington}
+\date{\today}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lm}{Lemma}
+
+\begin{document}
+
+\maketitle
+\begin{thm} [Equivalence of E-L equation and Hamiltonian system]
+     The curve $q(t)$ in $M$ is a solution of the E-L equation $\frac{d}{dt}\pdof{L}{\dot q}(q(t),\dot q(t)) = \pdof{L}{q}(q(t),\dot q(t))$ if and only if the curve $(p(t),q(t))$ in $T^*M$, with $p(t) = \pdof{L}{\dot q}(q(t),\dot q(t))$ is the solution to the following system:
+     \[\left\{\begin{aligned}
+         \dot q_i(t) &= \pdof{H}{p_i}(p(t),q(t))\\
+         \dot p_i(t) &= -\pdof{H}{q_i}(p(t),q(t))
+     \end{aligned}\right.\]
+     where $(p_1,\dots,p_n,q^1,\dots,q^n)$ are the canonical coordinates on $T^*M$ near $q\in M$, and where $H$ is related to $L$ via the Legendre transform:
+     \[H(p,q) = \max_{v\in T_qM}(p(v) - L(q,v))\]
+\end{thm}
+\begin{proof}
+    By strong convexity of $v\mapsto L(q,v)$ for all $q$, the maximum of $v\mapsto h(p,q,v)$, if attained is attained at a unique $v:=v(p,q)$ and $H(p,q) = h(p,q,v(p,q))$. For $v = v(p,q)$:
+    \begin{align}
+        0 &= \pd{v^i}h(p,q,v)\big|_{v=v(p,q)}\notag\\
+        &= \pd{v^i}\left(p_iv^i - L(q,v)\right)\bigg|_{v=v(p,q)}\notag\\
+        &= p_i - \pd{v^i}L(q,v)\big|_{v=v(p,q)}\notag\\
+        \Leftrightarrow p_i &= \pd{v^i}L(q,v)\big|_{v=v(p,q)}
+    \end{align}
+    Hence by the uniqueness of $v(p,q)$, we find that $v(p(t),q(t)) = \dot q(t)$ since
+    \[\pdof{L}{v}\bigg|_{(q,v)=(q(t),\dot q(t))} = p(t) = \pdof{L}{v}\bigg|_{(q,v) = (q(t),v(p(t),q(t)))}\]
+    Therefore, $H(p(t),q(t)) = h(p(t),q(t),\dot q(t))$, we see that
+    \begin{align*}
+        \pdof{H}{p_i}(p(t),q(t))&=\pd{p_i} h(p,q,v(p,q))\big|_{(p,q) = (p(t),q(t))}\\
+        &=\pd{p_i} h(p,q,v)\big|_{(p,q,v) = (p(t),q(t), v(p(t),q(t))} \\
+        &\quad+ \pd{v}h(p,q,v)\big|_{(p,q,v) = (p(t),q(t), v(p(t),q(t))}\pd{p_i}v(p,q)\big|_{(p,q) = (p(t),q(t))}
+    \end{align*}
+    Since $\pdof{h}{v}=0$ at $(p,q,v) = (p,q,v(p,q))$, in local coordinates, we have
+    \begin{align*}
+        \pdof{H}{p_i}(p(t),q(t))&=\pd{p_i} h(p,q,v)\big|_{(p,q,v) = (p(t),q(t), v(p(t),q(t))}\\
+        &=\pd{p_i} \left(\sum_{i=1}^n p_iv^i - L(q,v)\right)\big|_{(p,q,v) = (p(t),q(t), v(p(t),q(t))}\\
+        &=v^i|_{(p,q,v) = (p(t),q(t), v(p(t),q(t))}\\
+        &=\dot q^i(t)
+    \end{align*}
+    Therefore, we have that, for all $i$,
+    \[\dot q^i(t) = \pdof{H}{p^i}(p(t),q(t)).\]
+    Now, we will verify the second set of equations:
+    \begin{align*}
+        \pdof{H}{q^i}(p(t),q(t))&=\pd{q^i} h(p,q,v(p,q))\big|_{(p,q) = (p(t),q(t))}\\
+        &=\pd{q^i} h(p,q,v)\big|_{(p,q,v) = (p(t),q(t), v(p(t),q(t))} \\
+        &\quad+ \pdof{h}{v}\big|_{(p(t),q(t), v(p(t),q(t))}\pd{q^i}v(p,q)\big|_{(p(t),q(t))}\\
+        &=\pd{q^i} h(p,q,v)\big|_{(p,q,v) = (p(t),q(t), v(p(t),q(t))}+ 0\pdof{v}{q^i}\big|_{(p(t),q(t))}\\
+        &=\pd{q^i} \left(\sum_i p_iv^i - L(q,v)\right)\big|_{(p,q,v) = (p(t),q(t), \dot q(t))}\\
+        &=-\pdof{L}{q^i}\big|_{(p,q,v) = (p(t),q(t),\dot q(t))}\\
+        &=-\pdof{L}{q^i}\big|_{(q,v) = (q(t), \dot q(t))}\\
+    \end{align*}
+    By Euler-Lagrange, we have that 
+    \begin{align*}
+        \dot p(t) &= \frac{d}{dt}\pdof{L}{\dot q}(q(t),\dot q(t))\\
+        &=\pdof{L}{q}(q(t),\dot q(t))\\
+        &=-\pdof{H}{q^i}(p(t),q(t))
+    \end{align*}
+    Therefore, $H$ is a solution to the Hamiltonian system.
+\end{proof}
+\section{Canonical Symplectic Structure and Coordinate-free Construction of Hamiltonian vector fields in $T^*M$}
+\subsection{The tautological (Liouville) 1-form on $T^*M$}
+Let $\lambda = (p,q)\in T^*M$ where $q\in M, p\in T^*_qM$. Then let $\pi:T^*M\to M$ be the canonical projection: $\pi(p,q) = q$. We want to define a 1-form on $T^*M$ (which is a manifold itself). For some $w\in T_\lambda(T^*M)$. We define
+\[S(\lambda)(w) = p(\pi_{*,\lambda}(w))\]
+Note that $\pi_{*,\lambda}:T_\lambda(T^*M)\to T_qM$, so $p$ indeed acts upon $\pi_{*,\lambda}(w)$.
+\begin{lm}
+    In canonical coordinates $(p_1,\dots, p_n,q^1,\dots,q^n)\in T^*M$,
+    \[S = p^1dq^1+\cdots + p_ndq^n.\]
+\end{lm}
+\begin{proof}
+    In our coordinates, $\pi(p_1,\dots,p_n,q^1,\dots, q^n) = (q^1,\dots,q^n)$. Let $w=v^1\pd{q^1}+\cdots+v^n\pd{q^n}$. Then, 
+    \begin{align*}
+        s(w) &= p(d\pi(w))\\
+        &=\sum_i p_idq^i\left(\sum_jv^j\pd{q^j}\right) \\
+        &= \sum_i p_iv^i
+    \end{align*}
+    On the other hand,
+    \[\sum_i p_idq^i(w) = \sum_{i}p_idq^i\left(\sum_j v^i\pd{q^j} + \sum_j \xi_j\pd{p_j}\right) = \sum_i p_iv^i\]
+\end{proof}
+Let $\sigma = ds$ (the exterior derivative of the Liouville form).
+\subsubsection*{Properties of $\sigma$:}
+\begin{itemize}
+    \item $\sigma$ is exact (and thus closed)
+    \item \begin{lm}
+        $\sigma$ is a nondegenerate 2-form. (For every $\lambda\in T^*M$, if for some $w\in T_\lambda(T^*M)$ we have $\iota_w\sigma(\lambda)=0$, then $w=0$.)
+    \end{lm}
+    \begin{proof}
+        By Lemma 1, in canonical coordinates, $s = p_1dq^1 + \cdots + p_ndq^n$, so
+        \[ds = dp_1\wedge dq^1 + \cdots + dp_n\wedge dq^n.\]
+        In the basis $\left(\pd{p_1},\dots,\pd{p_n},\pd{q^1},\dots,\pd{q^n}\right)$ of $T_\lambda(T^*M)$, this form corresponds to the matrix
+        \[\left(\begin{array}{c|c}
+            0 & I \\
+            \hline
+            -I & 0
+        \end{array}\right)\]
+        since $\sigma(\pd{p_i},\pd{p_j}) = 0$, $\sigma(\pd{p_i},\pd{q^j}) = \delta_{ij}$, and $\sigma(\pd{q^i},\pd{q^j}) = 0$. Since this matrix is nonsingular, the form is nondegenerate (reference?)
+    \end{proof}
+\end{itemize}
+\begin{defn}
+     A closed, non-degenerate 2-form $\w$ on a manifold $M$ is called a symplectic form (or symplectic structure). If such a form exists on $M$, then the pair $(M,\w)$ is a symplectic manifold. For any such symplectic manifold, it can be shown that $\dim(M)$ is even.
+\end{defn}
+Therefore, we have just shown that the manifold $(T^*M,\sigma)$ is a symplectic manifold.
+\nl
+Any smooth function $H:T^*M\to\R$ is called an (autonomous) Hamiltonian.
+\begin{lm}
+    For any Hamiltonian $H:T^*M\to \R$, there exists a unique vector field, denoted by $\vec{H}$ such that $\iota_{\vec H} \sigma = -dH$. Moreover, in the canonical coordinates $(p_1,\dots, p_n,q^1,\dots,q^n)\in T^*M$,
+    \[\vec H = \pdof{H}{p_1}\pd{q^1}+\cdots + \pdof{H}{p_n}\pd{q^n} - pdof{H}{q^1}\pd{p_1}+\cdots + \pdof{H}{q^n}\pd{p_n} = \sum_{i} \pdof{H}{p_i}\pd{q^i} - pdof{H}{q^i}\pd{p_i}.\]
+    Thus, a curve $\lambda(t)$ in $T^*M$ satisfies $\lambda(t) = \vec H(\lambda(t))$ if and only if 
+    \[\left\{\begin{aligned}
+        \dot q^i(t) &= \pdof{H}{p_i}(p(t), q(t))\\
+        \dot p^i(t) &= -\pdof{H}{q^i}(p(t), q(t))
+    \end{aligned}\right.\]
+\end{lm}
+\begin{proof}
+    The existence and uniqueness of $\vec H$ follows from nondegeneracy.
+\end{proof}
+\end{document}
