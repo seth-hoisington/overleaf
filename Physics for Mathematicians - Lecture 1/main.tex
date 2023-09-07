@@ -1,0 +1,182 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\title{MATH 689 - Physics for Mathematicians}
+\author{Seth Hoisington}
+\date{\today}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{defn}{Definition}
+\newtheorem{rmk}{Remark}
+
+
+\begin{document}
+
+\maketitle
+\section{Lagrangian Mechanics}
+We can describe the position of a system of $N$ particles in $\R^3$ by a set of $3N$ coordinates: $\{(x_\al^1,x_\al^2,x_\al^3)\}_{\al=1}^N$. 
+\nl
+Given holonomic constraints (constraints on the positions of particles in the system), the system of particles is forced to live on a submanifold $M$ of $\R^{3N}$ (in that the sets of all possible positions is a point on $M$). $M$ is called the \textbf{configuration space} of the system.
+\begin{ex}
+    Two points joined by a rigid rod of length $\ell$ in the $(x,y)$-plane.
+\end{ex}
+Let $(x_1,y_1), (x_2,y_2)$ be two points joined by a rod of length $\ell$. Then, the position of the system can be defined by the location of the first point, and the angle (from $0$ to $2\pi$) of the rod. Therefore, the position of the system can be described by the point $(x,y,\theta)\in \R^2\times S^1\subseteq \R^4$. Therefore, the configuration space of this system is $\R^2\times S^1$. Alternatively, the configuration space can be described as the 3-dimensional submanifold of $\R^4$ defined by the zero set of the function $f(x_1,y_1,x_2,y_2)=(x_1-x_2)^2+(y_1-y_2)^2-\ell$.
+\nl
+Note that knowledge of the position of a system does not determine any information about the future position of the system. To determine the future positions of a system (in classical mechanics), we must know the position of all particles in the configuration space, given by a point $q$ in the configuration space $M$ and a vector $\dot q\in T_qM$. Hence, the point $(q,\dot q)$, which lies in the tangent bundle $TM$ of the configuration space can be used to determine the past and future states of the system, given predetermined equations of motion. In this setting, the tangent bundle $TM$ is called the \textbf{Phase space} of the system, and a partipular point in the phase space is called a \textbf{state} of the system.
+\section{The Euler-Lagrange Equation}
+\begin{ex}
+    The equation of motion of a free particle
+\end{ex}
+Suppose $x\in\R^n$ is a particle with mass $m$. Then, supposing that no forces are applied to the particle, then by Newton's Second Law, we have that
+\[m\frac{d^2x}{dt^2} = 0.\]
+\begin{ex}
+    The equation of a spring
+\end{ex}
+Suppose $x\in\R^n$ is a particle with mass $m$ attached to one end of a spring (anchored at the other end) with spring constant $k$. Then, the spring's motion can be described by the equation
+\[m\frac{d^2x}{dt^2} = -kx.\]
+\newline
+Euler-Lagrange gives us an alternative way of describing motion due to conservative (path-independent) forces. For such motions, there exists a smooth function $L$ depending on the state of the system which satisfies the \textbf{Euler-Lagrange Equation}:
+\[\frac{d}{dt}\pdof{L}{\dot q_i} = \pdof{L}{q_i}.\]
+In the first example, the function $L_1(x,\dot x) = \frac{m\dot x^2}{2}$ satisfies the E-L equation exactly when the equation of motion is satisfied. Similarly, $L_2(x,\dot x) = \frac{m\dot x^2}{2}-\frac{kx^2}{2}$ satisfies the E-L equation for a spring system (Ex 2.2).
+\newline
+\begin{exercise}
+    Check that the E-L equation is satisfied for the functions $L_1,L_2$ exactly when a particle satisfies the equations of motion in the examples above.
+\end{exercise}
+\begin{defn}
+    A smooth function $L:TM\to \R$ is called an \textbf{autonomous Lagrangian} (time-independent), and a smooth function $L:\R\times TM\to \R$ is called a \textbf{non-autonomous Lagrangian} (time-dependent).
+\end{defn}
+For a given Lagrangian $L$, we may define a functional $A$ which acts on curves in the configuration space $M$. For a curve $q:[t_0,t_1]\to M$ such that $q(t_i) = q^i$ for $q_i\in M$ for $i=0,1$, we define
+\[A(q) = \int_{t_0}^{t_1}L(t,q(t),\dot q(t))dt\]
+We call this functional an action on the space of curves connecting the points $q^0,q^1\in M$ at times $t_0$ and $t_1$, respectively.
+\newline
+\begin{defn}
+    Let $q$ be a curve in $M$. Given any one-parameter family of smooth curves $q_s(t)$, for $t\in [t_0,t_1]$ and $s\in (-\eps,\eps)$ such that $q_0 = q$, and $q_s(t_i) = q^i$ for all $s$, then $q$ is a \textbf{critical point} of $A$ if, g
+\[\frac{d}{ds}[A(q_s(t))]\Big|_{s=0} = 0.\]
+\end{defn} 
+\begin{thm}
+    A curve $q$ is a critical point of $A$ if and only if it is a solution to the Euler-Lagrange equation.
+\end{thm}
+\begin{proof}
+    Fix a one parameter family of curves $q_s$ as in the definition of a critical point of $A$. Let $h(t) = \pd{s}[q_s(t)]\big|_{s=0}\in T_{q(t)}M$. Then $h(t)$ is called a variational vector field. Note that since $q_s$ is constant at the endpoints, then $h(t_0)=h(t_1) = 0$. We have
+    \begin{align*}
+        \frac{d}{ds}[A(q_s)]\Big|_{s=0} &= \int_{t_0}^{t_1}\pd{s}L(t,q_s(t),\dot q_s(t))\big|_{s=0}dt\\
+        &=\int_{t_0}^{t_1}\left(\pdof{L}{q_s}\pdof{q_s}{s}+\pdof{L}{\dot q_s}\pdof{\dot q}{s}\right)\bigg|_{s=0}dt,\\
+        &=\int_{t_0}^{t_1}\left(\pdof{L}{q_0}h+\pdof{L}{\dot q_0}\pd{s}\pdof{q}{t}\bigg|_{s=0}\right)dt,\\
+        &=\int_{t_0}^{t_1}\left(\pdof{L}{q_s}\bigg|_{s=0}h+\pdof{L}{\dot q}\frac{dh}{dt}\right)dt.
+    \end{align*}
+    Now, we apply integration by parts to the second term:
+    \[\int_{t_0}^{t_1}\pdof{L}{\dot q}\dot h dt = \left.\pdof{L}{\dot q}h\right]_{t_0}^{t_1}-\int_{t_0}^{t_1}\frac{d}{dt}\pdof{L}{\dot q}h dt.\]
+    Noting that the boundary term is zero since $h(t_i) = 0$, we find that
+    \begin{align*}
+        \frac{d}{ds}[A(q_s)]\Big|_{s=0}&=\int_{t_0}^{t_1}\pdof{L}{q}hdt-\int_{t_0}^{t_1}\frac{d}{dt}\pdof{L}{\dot q}h dt\\
+        &=\int_{t_0}^{t_1}\left(\pdof{L}{q}-\frac{d}{dt}\pdof{L}{\dot q}\right)h dt.
+    \end{align*}
+    Define $G(t) := \pdof{L}{q}-\frac{d}{dt}\pdof{L}{\dot q}$. Note that if $L$ satisfies the E-L equation, we have that $\frac{d}{ds}[A(q_s)]\Big|_{s=0} = \int_{t_0}^{t_1}0h(t)dt = 0$ for any one-parameter family $q_s$ (as specified), so $q$ is indeed a critical point of $A$. On the other hand, if we assume that $q$ is a critical point, then $\frac{d}{ds}[A(q_s)]\Big|_{s=0}=0$, so $\int_{t_0}^{t_1}G(t)h(t) dt = 0$ for all variational vector fields $h$. We claim that this implies that $G(t)=0 $. Suppose, by way of contradiction that for some $t$, we have that $G(t)\neq 0$. Then, by continuity, there exists some interval $U=(t-\de,t+\de)$ such that $G(s)>0$ for all $s\in U$. Choose a positive bump function $h$  supported in $U$ (Do we have to show that such an $h$ is a variational vector field??). Then we have that
+    \[\int_{t_0}^{t_1} G(t)h(t)dt = \int_UG(t) >0.\]
+    This contradicts our assumption that $\int_{t_0}^{t_1} G(t)h(t)dt = 0$.
+\end{proof}
+\begin{rmk}
+    The above theorem proves the Least-action principle. The minimal trajectory (measured by the functional $A$) is the path which is determined solely by the equations of motion.
+\end{rmk}
+\section{The Least Action Principle}
+assume we have a system of $N$ particles in $\R^3$ with potential energy $U$, described by the coordinates $\{(x_\al^1,x_\al^2,x_\al^3)\}_{\al=1}^N$. Then, by Newton's Second Law, we have
+\[m_\al \ddot x_\al^i = F_\al^i = -\pdof{U}{x_\al^i}.\]
+Let $T = \sum_\al\sum_i \frac{m_\al (\dot x^i_\al)^2}{2}$ ($T$ represents the kinetic energy of the system). Then, we define the Lagrangian $L = T-U$. Then,
+\[\pdof{L}{\dot x_\al^i} = m_\al\dot x_\al^i\text{ and }\frac{d}{dt}\pdof{L}{\dot x_{\al}^i} = m_\al \ddot x_{\al}^i.\]
+Additionally, $\pdof{L}{x_\al^i} = -\pdof{U}{x_\al^i}$, so $\pdof{L}{x} = -\pdof{U}{x} = F$. Hence, the Lagrangian satisfies the E-L equation exactly when the system satisfies Newton's Laws of Motion.
+\begin{thm}[The Least Action Principle]
+    The motion of the mechanical system under consideration above coincides with an extremal of the action
+    \[A(q) = \int_{t_0}^{t_1}(T-U)dt.\]
+\end{thm}
+\begin{rmk}
+    By analyzing the second derivative $\frac{d}{ds}A(q_s)$, it can be shown that the extremals in question are indeed local minimizers, justifying the use of the word "least".
+\end{rmk}
+We say that a mechanical system is defined by a Lagrangian $L$, and its trajectories are solutions to the E-L equation with the given $L$.
+\begin{rmk}
+    In local coordinates $(q^1,\dots,q^n)$ on $M$, the quantity $p_i = \pdof{L}{\dot q^i}$ is called the generalized momentum conjugated to the coordinate $q^i$. Thus, the E-L equation can be written in the form $\dot p_i = \pdof{L}{q^i}$.
+\end{rmk}
+\begin{defn}
+    A function $I:TM\to \R$ is called a (first) integral of motion if, for any trajectory $q$ of a system, 
+    \[\frac{d}{dt}I(q(t),\dot q(t))\equiv 0,\]
+    or equivalently, $I$ is constant along the lift of the trajectory to $TM$.
+\end{defn}
+\begin{rmk}
+    First Integrals of Motion can be thought of as conservation laws. Along trajectories determined by the underlying laws of motion, these quantities don't change.
+\end{rmk}
+\begin{ex}
+    First integrals of motion of free particle
+\end{ex}
+Recall that $m\frac{d^2x}{dt^2} = 0$ for a free particle. The integrals of motion are momentum; $p=m\dot x$, and kinetic energy: $\frac{m\dot x^2}{2}$. It can be shown by taking the time derivative of these quantities that they are indeed integrals of motion.
+\begin{ex}
+    IoMs of Autonomous Lagrangians
+\end{ex}
+Assume that the Lagrangian is autonomous $(\frac{dL}{dt} = 0)$. Consider the quantity $\sum_i q^i\pdof{L}{\dot q^i}$ for a trajectory $q$. Then,
+\begin{align*}
+    \frac{d}{dt}\left[\sum_i q^i\pdof{L}{\dot q^i}\right]&=\sum_{i}\dot q^i\pdof{L}{\dot q^i} + q^i\frac{d}{dt}\pdof{L}{\dot q^i}\\
+    &=\sum_{i}\dot q^i\pdof{L}{\dot q^i} + q^i\pdof{L}{q^i}\\
+    &=\frac{d}{dt}L(q(t),\dot q(t))
+\end{align*}
+by Euler-Lagrange and the chain rule. Therefore,
+\[\frac{d}{dt}\left[\sum_iq^i\pdof{L}{\dot q^i} - L(q(t),\dot q(t))\right] = 0.\]
+Therefore, $H = \sum_iq^i\pdof{L}{\dot q^i} - L$ is an IoM for the system. Note that when $L=T-U$, then $H = T+U$, which is precisely the conservation of energy (of a closed system).
+\begin{ex}
+    Lagrangian independent of a certain coordinate
+\end{ex}
+Suppose $L$ is a Lagrangian such that in a given local coordinate system $(q^1,\dots,q^n)$, $L$ is independent of $q^i$ for some $i$. Then $p_i = \pdof{L}{\dot q^i}$ is an IoM given that, along any trajectory, $\frac{d}{dt}p_i = \frac{d}{dt}\pdof{L}{q^i} = \pdof{L}{q^i} = 0$ by Euler-Lagrange.
+\nl
+\begin{defn}
+    A diffeomorphism $\vhi:M\to M$ is called a symmetry of the Lagrangian $L$ if $\vhi^*L = L$ (i.e. $L(\vhi(q),\phi_{*,q}(v)) = L(q,v)$ for all $(q,v)\in TM$).
+\end{defn}
+\begin{ex}
+    Lagrangian independent of a coordinate $q^i$
+\end{ex}
+Let $L$ be a Lagrangian such that in the local coordinate system $(q^1,\dots,q^n)$, $L$ is independent of $q^i$. In this context, the coordinate $q^i$ is called cyclic. We then observe that $\phi^s(q^1,\dots,q^i,\dots,q^n) = (q^1,\dots,q^i+s,\dots,q^n)$, then $\phi^s$ is a symmetry of $L$ for all $s$.
+\end{document}
