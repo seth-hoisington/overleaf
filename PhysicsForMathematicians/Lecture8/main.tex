@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{September 14, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+
+\begin{document}
+
+\maketitle
+\section*{Special Relativity}
+\subsection*{Fundamental principles of special relativity}
+\begin{enumerate}[label=\Alph*]
+    \item \textbf{Relativity principle in inertial frames:} All laws of nature and equations describing them are the same in all inertial frames. In other words, all inertial frames are identical.
+    \item \textbf{Independence of speed of light w.r.t the motion of a source in an inertial frame}. The speed of light in a vacuum is independent of the motion of the source and is the same in all directions
+\end{enumerate}
+Let $K$ and $K'$ be two inertial frames such that $K$ moves along the $x$-axis with speed $v$. We want to find the transformation between 2 space-time coordinate systems $(x,t)$ and $(x',t')$ with respect to $K$ and $K'$, and it turns out that these two principles alone are sufficient. We consider
+\begin{equation}
+    x' = x'(x,t)\quad\text{and}\quad t' = t'(x,t)
+\end{equation}
+Principles A and B imply that (1) must satisfy the following 4 properties:
+\begin{itemize}
+    \item It sends straight lines (trajectories of free particles) 
+    \item 
+    \item The transformation (1) corresponding to velocity $-v$ is the inverse of the transformation (1) corresponding to the velocity $v$ (as $K'$ moves with velocity $-v$ with respect to $K$, using the relativity principle again)
+    \item 
+\end{itemize}
+From \ref{eqn1} it follows that it is linear with respect to $(x,t)$. So
+\[\begin{pmatrix}
+    x'\\
+    t'
+\end{pmatrix}=A(v)\begin{pmatrix}
+    x\\
+    t
+\end{pmatrix}\]
+From linearity and Property 2, it follows that 
+\begin{equation}
+    (ct')^2-\|x'\|^2 = \lambda(v)((ct)^2 - \|x\|^2)
+\end{equation}
+Besides $\lambda(0) = 1$ and 
+\end{document}

@@ -60,6 +60,7 @@
 \newtheorem{lm}{Lemma}
 \newtheorem{cor}{Corollary}
 \newtheorem{rk}{Remark}
+\newtheorem{prop}{Proposition}
 
 \begin{document}
 
@@ -68,8 +69,9 @@
 \begin{lm}
     For any Hamiltonian $H:T^*M\to \R$, there exists a unique vector field, denoted by $\vec{H}$ such that 
     \begin{equation}
-        \iota_{\vec H} \sigma = -dH
-    \end{equation}. Moreover, in the canonical coordinates $(p_1,\dots, p_n,q^1,\dots,q^n)\in T^*M$,
+        \iota_{\vec H} \sigma = -dH.
+    \end{equation}
+    Moreover, in the canonical coordinates $(p_1,\dots, p_n,q^1,\dots,q^n)\in T^*M$,
     \begin{equation}\label{eq:2}
         \vec H = \sum_{i} \pdof{H}{p_i}\pd{q^i} - \pdof{H}{q^i}\pd{p_i}.
     \end{equation}
@@ -80,7 +82,7 @@
     \end{aligned}\right.\]
 \end{lm}
 \begin{proof}
-    (Continued from previous lecture) We shall now prove (\ref{eq:2}). Assume $\vec H = \sum_{i} \pdof{H}{p_i}\pd{q^i} - \pdof{H}{q^i}\pd{p_i}$ and let $z = \sum_{i} x_i\pd{q^i} + y_i\pd{p_i}$. Then
+    (Continued from previous lecture) We shall now prove (\ref{eq:2}). Assume $\vec H = \sum_{i} v^i\pd{q^i} + w_i\pd{p_i}$ and let $z = \sum_{i} x_i\pd{q^i} + y_i\pd{p_i}$. Then
     \begin{align*}
         \sigma(\vec{H},z) &= \sum_i (dp_i\wedge dq^i)(\vec{H},z)\\
         &=\sum_i w_ix^i - v^iy_i.\\
@@ -91,7 +93,7 @@
     we have that $w_i = -\pdof{H}{q^i}$ and $v^i = \pdof{H}{p_i}$.
 \end{proof}
 \begin{defn}
-    $\vec H$ is called teh \textbf{Hamiltonian vector field} associated to $H$.
+    $\vec H$ is called the \textbf{Hamiltonian vector field} associated to $H$.
 \end{defn}
 \section{Poisson Brackets}
 Let $H,G\in C^\infty(T^*M)$. Then the Poisson Bracket $\{H,G\}$ is given by:
@@ -99,11 +101,11 @@ Let $H,G\in C^\infty(T^*M)$. Then the Poisson Bracket $\{H,G\}$ is given by:
 \subsection{Properties of the Poisson Bracket:}
 \begin{itemize}
     \item \textbf{Skew-symmetry:} $\{H,G\} = -\{G,H\}$. Follows from skew-symmetry of $\sigma$.
-    \item \textbf{Jacobi Identity} Exercise 3 of Homework 1
-    \item Thus, the Posson Bracket is a Lie bracket.
+    \item \textbf{Jacobi Identity} Exercise 3 of Homework 1. Specifically, Since $\overrightarrow{\{H,G\}} = \left[\vec H, \vec G\right]$, then the Jacobi Identity for the Poisson bracket follows from the Lie bracket (??).
+    \item Thus, the Poisson Bracket is a Lie bracket on $C^\infty(T^*M)$, making the space a (very big) Lie algebra!
 \end{itemize}
 \subsection{Coordinate Expression for Poisson Brackets in canonical coordinates}
-We see that $\{H,G\} = \vec H(G) = \pdof{H}{p_i}\pdof{G}{q^i} - \pdof{H}{q^i}\pdof{G}{p_i}$, we have that $\{p_i,p_j\} = \{q^i,q^j\} = 0$ and $\{p_i,q^j\} = \delta_{ij}$.
+We see that $\{H,G\} = \vec H(G) = \sum_i\pdof{H}{p_i}\pdof{G}{q^i} - \pdof{H}{q^i}\pdof{G}{p_i}$, we have that $\{p_i,p_j\} = \{q^i,q^j\} = 0$ and $\{p_i,q^j\} = \delta_{ij}$.
 \section{First integrals in the Hamiltonian setting}
 Now, we consider the following Hamiltonian system:
 \[\left\{\begin{aligned}
@@ -112,34 +114,60 @@ Now, we consider the following Hamiltonian system:
 \end{aligned}\right.\]
 Let us consider the first integrals of motion of this system.
 \begin{defn}
-    A function $G:T^*M\to \R$ is called a first integral of the Hamiltonian system $\dot\lambda = \vec{H} \lambda$ if, for any trajectory $\lambda(t)$ of the system,
-    \begin{align*}
-        &G(\lambda(t)) \equiv \text{constant}\\
-        &\Leftrightarrow \frac{d}{dt}G(\lambda(t))\equiv 0\\
-        &\Leftrightarrow \vec{H}(G) = 0\\
-        &\Leftrightarrow \{H,G\} = 0
-    \end{align*}
+    Akin to the Lagrangian case, a \textbf{trajectory} $\lambda(t)$ of the Hamiltonian system defined by $H$ is a curve in $T^*M$ which is a solution of the system $\dot\lambda = \vec H(\lambda(t))$.
 \end{defn}
+\begin{defn}
+    A function $G:T^*M\to \R$ is called a first integral of the Hamiltonian system $\dot\lambda = \vec{H} \lambda$ if, for any trajectory $\lambda(t)$ of the system, $G(\lambda(t))$ is constant.
+\end{defn}    
+\begin{prop}
+    $G$ is an integral of the Hamiltonian system defined by $H$ if and only if $\{G,H\} = 0$. 
+\end{prop}
+\begin{proof}
+    First, we see that, in coordinates,
+    \begin{align*}
+        \frac{d}{dt}G(\lambda(t)) &= DG_{\lambda(t)}(\dot\lambda(t))\\
+        &= DG_{\lambda(t)}\left(\vec H_{\lambda(t)}\right)\\
+        &=\sum_i \pdof{G}{p_i}\left(\vec H_{\lambda(t)}\right)_{p_i} + \pdof{G}{q^i}\left(\vec H_{\lambda(t)}\right)_{q^i}\\
+        &=\sum_i \pdof{G}{p_i}\left(-\pdof{H}{q^i}\right)_{p_i} + \pdof{G}{q^i}\left(\pdof{H}{p_i}\right)\\
+        &=\sum_i \pdof{H}{p_i}\pdof{G}{q^i} - \pdof{H}{q^i}\pdof{G}{p_i}\\
+        &=\vec{H}(G).
+    \end{align*}
+    Therefore,
+    \begin{align*}
+            &G(\lambda(t)) \equiv \text{constant}\\
+            &\Leftrightarrow \frac{d}{dt}G(\lambda(t))\equiv 0\\
+            &\Leftrightarrow \vec{H}(G) = 0\\
+            &\Leftrightarrow \{H,G\} = 0
+    \end{align*}
+\end{proof}
 \begin{cor}
     $H$ is the integral of $\dot \lambda = \vec H(\lambda)$
 \end{cor}
 \begin{proof}
-    $\{\vec H,\vec H\} = 0$.
+    $\{H,H\} = 0$ by antisymmetry.
 \end{proof}
 \begin{thm}[Noether's Theorem in the Hamiltonian setting]
-    Assume that the mechanical system is defined by a Lagrangian $L:TM\to \R$ and $H$ is the corresponding Hamiltonian (via the Legendre transform). Let $X$ be a vector field on $M$ which generates the 1-param. group of symmetries of $L$. Then, for $q\in M, p\in T_q^*M$,
+    Assume that the mechanical system is defined by a Lagrangian $L:TM\to \R$ and $H$ is the corresponding Hamiltonian (via the Legendre transform). Let $X$ be a vector field on $M$ which generates a 1-parameter group of symmetries of $L$, $\vhi^s$. Then, for $q\in M, p\in T_q^*M$,
     \[H_X(p,q) = p(X(q)),\]
     is an integral of the system $\dot \lambda = \vec H(\lambda)$.
 \end{thm}
 \begin{proof}
-    By the original Noether Theorem,
+    Recall from the previous lecture that a curve $q(t)\in M$ is a solution to the Lagrangian system if and only if, for $p(t) = \pdof{L}{\dot q}\big|_{(q(t),\dot q(t))}$, then the curve $\lambda(t) = (p(t),q(t))$ is a trajectory for the Hamiltonian system. We also recall that by the original Noether Theorem,
     \[I(q,\dot q) = \pdof{L}{\dot q^i}X^i\]
-    is a first integral for Euler-Lagrange.
-
-    $H_X$ is called the quasi-impulse of $X$ (by the analogy that $H_{\pd{q^i}} = p_i$). $H_X$ is linear on each fiber and vice-versa if $H\in C^\infty(T^*M)$ is linear on each fiber then there exists $X\in \text{Vec}(M)$ such that $H=H_X$
+    is a first integral for the Lagrangian system. Therefore, letting $\lambda(t) = (p(t),q(t))$ be a trajectory, we have that 
+    \begin{align*}
+        H_X(\lambda(t)) &= p(t)\left(X_{q(t)}\right)\\
+        &=\pdof{L}{\dot q}\Big|_{(q(t),\dot q(t))}X_{q(t)}\\
+        &=\pdof{L}{\dot q}\Big|_{(q(t),\dot q(t))}\pdof{\vhi^s}{s}\Big|_{s=0}
+        &=I(q(t),\dot q(t))
+    \end{align*}
+    This quantity is constant along $(q(t),\dot q(t))$, so $H_x(\lambda(t))$ is constant.
 \end{proof}
 \begin{rk}
-    If $X,Y\in \text{Vec}(M)$, then $\{H_X,H_Y\} = H_{[X,Y]}$. Therefore, the algebra of infinitesimal symmetries of the Lagrangian (w.r.t Poisson Bracket) is isomorphic to the algebra of integrals of the Hamiltonian system $\dot \lambda = \vec H(\lambda)$ which is linear on fibers of $T^*M$.
+    $H_X$ is called the quasi-impulse of $X$ (by the analogy that $H_{\pd{q^i}} = p_i$). $H_X$ is linear on each fiber, and vice-versa if $H\in C^\infty(T^*M)$ is linear on each fiber then there exists $X\in \mathcal{X}(M)$ such that $H=H_X$
+\end{rk}
+\begin{rk}
+    If $X,Y\in \mathcal{X}(M)$, then $\{H_X,H_Y\} = H_{[X,Y]}$. Therefore, the algebra of infinitesimal symmetries of the Lagrangian (w.r.t Poisson Bracket) is isomorphic to the algebra of integrals of the Hamiltonian system $\dot \lambda = \vec H(\lambda)$ which is linear on fibers of $T^*M$.
 \end{rk}
 \begin{ex}
     Integrals in $\R^3$
@@ -147,8 +175,8 @@ Let us consider the first integrals of motion of this system.
 Let $M=\R^3\sim \vec F$. Let
 \[L = \frac{m|\vec r|^2}{2} - U(|\vec r|)\]
 This is called the central field. Then, the group of symmetries of $L$ is $SO(3)$, so 
-\[H_i = \ang{\vec r\times m\dot{\vec r},\ell_i} = \ang{m\dot{\vec r},\ell_i\times\vec r}\]
-are integrals of E-L. Also, $H_i(p,\vec r) = p(\ell_i\times \vec {r})$ are integrals of $\dot\lambda = \vec H(\lambda)$. (Recall that $H = \frac{\|p\|^2}{2m} + U(\vec r)$). It can be shown that
+\[H_i = \ang{\vec r\times m\dot{\vec r},\vec{e}} = \ang{m\dot{\vec r},\vec{e}\times\vec r}\]
+are integrals of E-L (identifying the vector $\vec e\times \vec r$ with the generator $Y_{\vec{e}}\in\mathfrak{so}(3)$. Also, $H_i(p,\vec r) = p(\vec e\times \vec {r})$ are integrals of $\dot\lambda = \vec H(\lambda)$. (Recall that $H = \frac{\|p\|^2}{2m} + U(\vec r)$). It can be shown that
 \[\begin{array}{ccc}
      (Y_1,Y_2) = Y_3 & & \{H_1,H_2\} = H_3\\
      (Y_2,Y_3) = Y_1 &\Leftrightarrow & \{H_2,H_3\} = H_1\\
@@ -167,6 +195,7 @@ Hence, $(H,G,H_i)$ are integrals which pairwise commute.
 \end{rk}
 All symplectic manifolds of the same dimension are locally equivalent, i.e. if $(N_1,\w_1)$ and $(N_2,\w_2)$ are 2 symplectic manifolds with $\dim N_1 = \dim N_2$, then for all $\lambda_1\in N_1$ and $\lambda_2\in N_2$, there exists a neighborhood $U_1$ and $U_2$ of each point and a diffeomorphism $\vhi:U_1\to U_2$ such that $\vhi(\lambda_1) = \lambda_2$ and that $\vhi^*\w_2 = \w_1$.
 \begin{thm}[Darboux's Theorem]
-    If $(N,\w)$ is a a symplectic manifold of dimension $2n$, then around every $\lambda$, there exists a coordinate system $(p_1,\dots, p_n,q^1,\dots, q^n)$ such that $\w = \sum_i dp_i\wedge dq^i$.
+    If $(N,\w)$ is a a symplectic manifold of dimension $2n$, then around every point $\lambda$, there exists a coordinate system $(p_1,\dots, p_n,q^1,\dots, q^n)$ such that $\w = \sum_i dp_i\wedge dq^i$.
 \end{thm}
+WILL GO THROUGH THE PROOF LATER
 \end{document}

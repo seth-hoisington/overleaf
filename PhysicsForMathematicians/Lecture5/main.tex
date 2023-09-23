@@ -20,6 +20,7 @@
 \newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
 \newcommand{\one}{\mathbbm{1}}
 \newcommand{\g}{\mathfrak{g}}
+\newcommand{\Ell}{\mathcal L}
 
 \newcommand{\eps}{\varepsilon}
 \newcommand{\nl}{\newline\newline\noindent}
@@ -79,8 +80,7 @@ From linear algebra, for every $\lambda\in N$, we can find a basis in $T_\lambda
 \end{bmatrix}\]
 which corresponds to the coordinate basis $\left(\pd{p_1},\dots,\pd{p_n},\pd{q^1},\dots,\pd{q^n}\right)$ in \eqref{eqn1}. In fact, such bases in $T_\lambda N$ are defined modulo the Linear Symplectic group $Sp(T_\lambda N)$. Darboux says that from closure of $\sigma$ we can choose such a basis at every point of a neighborhood such that the corresponding vector fields commute. Hence, they are coordinate bases w.r.t some coordinates.
 \section{Lagrangian Submanifolds of a Symplectic Space}
-Linear algebra preliminary:
-\nl
+\subsection{Linear algebra preliminary}
 Assume that $W$ is a $2n$-dimensional vector space with a non-degenerate skew-symmetric form $\w$. (e.g. $W=T_\lambda N$, $\w = \sigma_\lambda$). Given a subspace $L\subseteq W$, let $L^\angle = \{v\in W\,|\,\w(v,z) = 0\forall z\in L\}$. Then since $\w$ is non-degenerate, we have $\dim L^\angle = \dim W - \dim L = 2n - \dim L$. $L$ is called isotropic if $L\subseteq L^\angle$. For example, if $\dim L = 1$, then for all $v,w\in L$, we have that $v=\lambda w$, so, by skew-symmetry,
 \[\sigma(v,w) = \lambda \sigma(v,v) = 0.\]
 If $L\subseteq W$ is isotropic, then $\dim L\leq \frac{1}{2}\dim W = n$. If $L$ is isotropic and $\dim L = n$, then $L$ is called \textbf{Lagrangian}.
@@ -88,38 +88,45 @@ If $L\subseteq W$ is isotropic, then $\dim L\leq \frac{1}{2}\dim W = n$. If $L$ 
     
 \end{ex}
 In a basis $\left(\pd{p_1},\dots,\pd{p_n},\pd{q^1},\dots,\pd{q^n}\right)$ ,  (in which $\w$ has the matrix $\begin{bmatrix}0 & I \\ -I & 0\end{bmatrix}$), we let $L_0 = \spn\left\{\pd{q^1},\dots,\pd{q^n}\right\}$ and let $L_\infty =
-\spn\left\{\pd{p_1},\dots,\pd{p_n}\right\}$. More generally, for any symmetric matrix $S = [S_{ij}]_{i,j=1}^n$, we have that
+\spn\left\{\pd{p_1},\dots,\pd{p_n}\right\}$. Both these subspaces are Lagrangian. More generally, for any symmetric matrix $S = [S_{ij}]_{i,j=1}^n$, we have that the subspace
 \[L_S = \spn\left\{\pd{q^i} + \sum_{j=1}^n S_{ij}\pd{p_j}\right\}.\]
-Indeed, this follows since
+is Lagrangian. Indeed, this follows, given that
 \begin{align*}
-    \w\left(\pd{q^{i_1}} + \sum_{j=1}^n S_{i_1j}\pd{p_j},\pd{q^{i_2}} + \sum_{j=1}^n S_{i_2j}\pd{p_j}\right)\\
-    INSERT MORE\\
+    &\w\left(\pd{q^{i_1}} + \sum_{j=1}^n S_{i_1j}\pd{p_j},\pd{q^{i_2}} + \sum_{j=1}^n S_{i_2j}\pd{p_j}\right)\\
+    &=\sum_i (dp_i\wedge dq^i)\left(\pd{q^{i_1}} + \sum_{j=1}^n S_{i_1j}\pd{p_j},\pd{q^{i_2}} + \sum_{j=1}^n S_{i_2j}\pd{p_j}\right)\\
     &=S_{i_1i_2} - S_{i_2i_1}\\
     &=0
 \end{align*}
 Moreover $L_S$ is Lagrangian if and only if $S$ is symmetric, and any Lagrangian $L$ transversal to $L_\infty$ is of the form $L=L_S$ for some symmetric matrix $S$.
 \begin{defn}
-    A submanifold $L$ of asymplectic manifold $(N,\sigma)$
+    A submanifold $L$ of a symplectic manifold $(N,\sigma)$
  is called Lagrangian if, for every $\lambda\in L$, $T_\lambda L$ is a Lagrangian subspace of $T_\lambda N$. Equivalently, $L$ is Lagrangian if $\sigma|_L = 0$ and $\dim L = \frac{1}{2}\dim N$.
 \end{defn}
 \begin{ex}
-    Let $N=T^*<$ with the canonical symplectic form $\sigma$. Then,
+    Let $N=T^*M$ with the canonical symplectic form $\sigma$. Then,
     \begin{enumerate}
-        \item Every fiber of $T^*M$ is Lagrangian. (NEED CLARIFICATION)\\
+        \item Every fiber of $T^*M$ is Lagrangian.
         \item Consider $M$ embedded into $T^*M$ are a graph of $v$-sections, then $M$ is defined by $dp_1 = dp_2 = \cdots = dp_n = 0$, so $\sigma_M = 0$.
     \end{enumerate}
 \end{ex}
 \begin{ex}
-    Given a smooth function $f:M\to \R$, the graph of its differential is given by $L_f = \{(df_q,q)\,|\, q\in M\}$. Then (sketchin), we can show that
-    \[T_\lambda(T^*M) = \spn\left\{\pd{q^1} + \sum_{j=1}^n \frac{\partial^2 f}{\partial q^i\partial q^j }\pd{q^j}\right\}\]
+    Given a smooth function $f:M\to \R$, the graph of its differential, given by $L_f = \{((df)_q,q)\,|\, q\in M\}\subseteq T^*M$, is a Lagrangian submanifold. Then (sketching), we can show that for each $\lambda\in T^*M$,
+    \[T_\lambda(T^*M) = \spn\left\{\pd{q^1} + \sum_{j=1}^n \frac{\partial^2 f}{\partial q^i\partial q^j }\pd{q^j}\right\}.\]
+    Since the Hessian matrix $S=\left[\frac{\partial^2 f}{\partial q^i\partial q^j }\right]_{ij}$ is symmetric for any smooth map by Clairaut's theorem, then $L_f = L_S$. Hence, it is Lagrangian.
 \end{ex}
 \section{Liouville Integrability}
-Let $(N,\sigma)$ be a symplectic manifold. We say that the Hamiltonians $(F_1,\dots,F_k)\in C^\infty(N)^k$  are thn involution if $\{F_i,F_j\} = 0$ for all $1\leq i,j\leq k$. If $\{F_1,\dots, F_k\}$ are in involution, then for all $\lambda \in N$, $\spn\{\vec F_1(\lambda),\dots,\vec F_k(\lambda)\}$ is an isotropic subspace of $T_\lambda N$.
+Let $(N,\sigma)$ be a symplectic manifold. We say that some $k$ Hamiltonians $(F_1,\dots,F_k)\in C^\infty(N)^k$  are in involution if $\{F_i,F_j\} = 0$ for all $1\leq i,j\leq k$. If $(F_1,\dots, F_k)$ are in involution, then for all $\lambda \in N$, $\spn\{(\vec F_1)_\lambda,\dots,(\vec F_k)_\lambda\}$ is an isotropic subspace of $T_\lambda N$.
 \nl
-Assume that $k=n$ and $(F_1,\dots,F_n)$ are independent in involution. Then, we see that $\spn\{\vec F_1,\dots,\vec F_n\}$  is an involutive distribution over $N$ since $[\vec F_i, \vec F_j] = \{F_i,F_j\} = 0$. Therefore, the distribution is integrable by Frobenius' Theorem, so there exists an $n$-dimensional integral submanifold, which is in fact Lagrangian $(\sigma(\vec F_i,\vec F_j) = 0)$. Given this, the set $(F_1,\dots,F_n)$ which is independent in involution is called Liouville Integrable. Let $f\in \R^n$ and let $f = (f_1,\dots,f_n)$. Then, define
+We say that the Hamiltonians $(F_1,\dots,F_k)$ are independent if the vectors $\{(dF_1)_\lambda,\dots,(dF_k)_\lambda\}$ are linearly independent. By a simple linear transformation, we can conclude that $\{(\vec F_1)_\lambda,\dots,(\vec F_k)_\lambda\}$. Therefore, if a set of $k$ Hamiltonians are independent and in involution, then $k\leq n = \frac{\dim N}{2}$.
+\nl
+Assume that $k=n$ and $(F_1,\dots,F_n)$ are independent in involution. Then, we see that $\spn\{\vec F_1,\dots,\vec F_n\}$  is an involutive distribution over $N$ since $[\vec F_i, \vec F_j] =\overrightarrow{\{F_i,F_j\}} = \vec 0 = 0$. Therefore, the distribution is integrable by Frobenius' Theorem, so there exists an $n$-dimensional integral submanifold, which is in fact Lagrangian $(\sigma(\vec F_i,\vec F_j) = 0)$. Given this, the set $(F_1,\dots,F_n)$ which is independent in involution is called Liouville Integrable. Let $f\in \R^n$ and let $f = (f_1,\dots,f_n)$. Then, define
 \[N_f = \{\lambda\in N\,|\,F_i(\lambda) = f_i,\,i=1,\dots,n\}.\]
 Then if $N_f\neq \emptyset$, then $N_f$ is a Lagrangian submanifold of $N$. $N_f$ is invariant under the flow generated by $\vec F_i$ for every $i$.
-\nl
+\begin{rk}
+    Note that if $(F_1,\dots,F_k)$ are integrals of $F_1$, then the common level set, $N_f = \{F_1=f_1,\dots,F_k=f_k\}$ for $f=(f_1,\dots,f_n)\in\R^n$, if not empty, is a codimension $k$ submanifold in $N$ and it is invariant with respect to the flow of $\vec F_1$. So, having $k$ integrals, we can reduce the degrees of freedom by $k$. The tangent space to $N_f$ at some point $\lambda\in N_f$,
+    \[T_\lambda N_f = \ker (dF_1)_\lambda\cap\cdots\cap\ker(dF_k)_\lambda = \left(\span\{\vec F_1,\dots,\vec F_k\}\right)^\angle\]
+    In particular, if $(F_1,\dots,F_k)$ are in involution, then $\spn\left(\vec F_1, \dots, \vec F_k\}\right)\big|_\lambda$ is an isotropic space, so $\spn\left(\vec F_1, \dots, \vec F_k\}\right)\big|_\lambda\subseteq T_\lambda N_f$.
+\end{rk}
 \begin{thm}[Arnold-Liouville]
     Consider a Hamiltonian system $\dot\lambda = \vec H(\lambda)$ on $N$ admitting $n$ integrals $(F_1 - H, F_2,\dots,F_n)$ independent in involution. Let $f\in \R^n$. Then
     \begin{enumerate}
@@ -133,7 +140,12 @@ Then if $N_f\neq \emptyset$, then $N_f$ is a Lagrangian submanifold of $N$. $N_f
             \vdots\\
             \vhi_n(t) & = \vhi_n(0) +\w_n t \mod 2\pi
         \end{aligned}\]
-        \item 
+        \item Moreover, in the neighborhood $\tildeN$ of $N_f$, there are symplectic coordinates $(I,\vhi)$ (i.e. $\tilde N\cong D\times T^n$) such that $\dot\lambda = \vec H(\lambda)$ is equivalent to
+        \[\left\{\begin{aligned}
+            \dot I&=0\\
+            \dot \vhi = \w(I)
+        \end{aligned}\right.\]
+        Note that since $I$ is constant on $N_f$, then 
     \end{enumerate}
 \end{thm}
 \end{document}

@@ -143,24 +143,24 @@ Let $\sigma = ds$ (the exterior derivative of the Liouville form).
     \begin{proof}
         By Lemma 1, in canonical coordinates, $s = p_1dq^1 + \cdots + p_ndq^n$, so
         \[ds = dp_1\wedge dq^1 + \cdots + dp_n\wedge dq^n.\]
-        In the basis $\left(\pd{p_1},\dots,\pd{p_n},\pd{q^1},\dots,\pd{q^n}\right)$ of $T_\lambda(T^*M)$, this form corresponds to the matrix
+        In the basis $\left(\pd{p_1},\dots,\pd{p_n},\pd{q^1},\dots,\pd{q^n}\right)$ of $T_\lambda(T^*M)$, the bilinear form corresponds to the matrix
         \[\left(\begin{array}{c|c}
             0 & I \\
             \hline
             -I & 0
         \end{array}\right)\]
-        since $\sigma(\pd{p_i},\pd{p_j}) = 0$, $\sigma(\pd{p_i},\pd{q^j}) = \delta_{ij}$, and $\sigma(\pd{q^i},\pd{q^j}) = 0$. Since this matrix is nonsingular, the form is nondegenerate (reference?)
+        since $\sigma(\pd{p_i},\pd{p_j}) = 0$, $\sigma(\pd{p_i},\pd{q^j}) = \delta_{ij}$, and $\sigma(\pd{q^i},\pd{q^j}) = 0$. Since this matrix is nonsingular, the form is nondegenerate.
     \end{proof}
 \end{itemize}
 \begin{defn}
      A closed, non-degenerate 2-form $\w$ on a manifold $M$ is called a symplectic form (or symplectic structure). If such a form exists on $M$, then the pair $(M,\w)$ is a symplectic manifold. For any such symplectic manifold, it can be shown that $\dim(M)$ is even.
 \end{defn}
-Therefore, we have just shown that the manifold $(T^*M,\sigma)$ is a symplectic manifold.
+Therefore, $(T^*M,\sigma)$ is a symplectic manifold for any smooth manifold $M$.
 \nl
 Any smooth function $H:T^*M\to\R$ is called an (autonomous) Hamiltonian.
 \begin{lm}
     For any Hamiltonian $H:T^*M\to \R$, there exists a unique vector field, denoted by $\vec{H}$ such that $\iota_{\vec H} \sigma = -dH$. Moreover, in the canonical coordinates $(p_1,\dots, p_n,q^1,\dots,q^n)\in T^*M$,
-    \[\vec H = \pdof{H}{p_1}\pd{q^1}+\cdots + \pdof{H}{p_n}\pd{q^n} - pdof{H}{q^1}\pd{p_1}+\cdots + \pdof{H}{q^n}\pd{p_n} = \sum_{i} \pdof{H}{p_i}\pd{q^i} - pdof{H}{q^i}\pd{p_i}.\]
+    \[\vec H = \pdof{H}{p_1}\pd{q^1}+\cdots + \pdof{H}{p_n}\pd{q^n} - \pdof{H}{q^1}\pd{p_1}+\cdots + \pdof{H}{q^n}\pd{p_n} = \sum_{i} \pdof{H}{p_i}\pd{q^i} - \pdof{H}{q^i}\pd{p_i}.\]
     Thus, a curve $\lambda(t)$ in $T^*M$ satisfies $\lambda(t) = \vec H(\lambda(t))$ if and only if 
     \[\left\{\begin{aligned}
         \dot q^i(t) &= \pdof{H}{p_i}(p(t), q(t))\\
@@ -168,6 +168,6 @@ Any smooth function $H:T^*M\to\R$ is called an (autonomous) Hamiltonian.
     \end{aligned}\right.\]
 \end{lm}
 \begin{proof}
-    The existence and uniqueness of $\vec H$ follows from nondegeneracy.
+    The existence and uniqueness of $\vec H$ follows from nondegeneracy. We claim that the interior product, as a map $\iota:T_\lambda(T^*M)\to T_\lambda^*(T^*M)$ given by $Y\mapsto \iota_Y\sigma$, is injective. Indeed, if $\iota_Y\sigma = 0$ for some $Y\in T_\lambda(T^*M)$. However, by nondegeneracy, if $\iota_Y\sigma(X) = \sigma(Y,X) = 0$ for all vectors $X\in T_\lambda(T^*M)$, it follows that $Y=0$. Surjectivity follows from rank-nullity given that $\dim T_\lambda(T^*M) = \dim T^*_\lambda(T^*M) = 2n$. Therefore, we may let $\vec H = \iota^{-1}(-dH)$. (Proof continued in the next lecture)
 \end{proof}
 \end{document}

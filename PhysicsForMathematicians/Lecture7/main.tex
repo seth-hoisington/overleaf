@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{Sepember 5, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+
+\begin{document}
+
+\maketitle
+\section*{Last Time:}
+$\{F_i,F_j\} = 0$, $\{\vhi_i,\vhi_j\} = 0$, $\{F_i,\vhi_j\} = \delta_{ij}$.
+
+Let $a_{ij} = \{F_{ij},\vhi_{ij}\}$
+
+$N$ independent of $\sigma$. $\det(a_{ij}) \neq 0$.
+
+$\{F_m, \{\vhi_i,\vhi_j\}\}$ depends on $F$ only.
+
+
+LONG PROOF, DIDNT FOLLOW, GO BACK THROUGH LATER
+
+We have $(I,\psi)$ symplectic, also called action-angle. Then $\dot\lambda = \vec H(\lambda)\Leftrightarrow H(I), \dot I = 0 = -\pdof{H}{\psi} \& \dot\psi = \w(I) = \pdof{H}{I}$
+\section*{LFDAF Method of generating functions to construct action-angle variables}
+Consider the action
+\[S(q,t) = \min\left\{\int_{t_0}^tL(t,q(t),\dot q(t))dt\,\big|\,\text{$q(t)$ a trajectory}, q(t_0) = q_0,q(t_1) = q_1\right\}\]
+Then $\pdof{S}{q} + H\left(\pdof{S}{q},q,t\right) = 0$ where $H$ is the Hamiltonian corresponding to the Lagrangian. (see Arnold, p. 254).
+\nl
+There is a simpler way to find action-angle variables. If $(I,\vhi)$ are symplectic coordinates, then the form $pdq - Id\vhi$ is closed because 
+\[d(pdq - Id\vhi) = dp\wedge dq - dI\wedge d\vhi = 0\]
+If $\gamma_k$ is a generator of $\pi_1(\mathbb{T}^n)$, then
+$\int_{\gamma_k}pdq - Id\vhi$ is independent of representative in $\pi_1(\mathbb{T}^n)$, so we let
+\begin{align*}
+    \tilde C_{k^i} &= \int_{\gamma_k}pdq - Id\vhi\\
+    &=\int_{\gamma_k}pdq - I_k\intd\vhi_k\\
+    &\Rightarrow
+\end{align*}
+\end{document}
