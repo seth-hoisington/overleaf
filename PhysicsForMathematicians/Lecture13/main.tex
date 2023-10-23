@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\curlyL}{\mathcal L}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians, Lecture 11}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{September 28, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+
+\begin{document}
+
+\maketitle
+
+\section{N\"oether's Theorem for classical fields}
+\section{Elements of Electromagnetism}
+Let $\vec E(t,x)$ denote the electric field and $\vec B(t,x)$ for the magnetic field. Then, the Lorentz force on  a charge $q$ moving with velocity $\vec v$ (in Gauss units) is given by
+\[\vec F = q\vec E + \frac{q}{c}\vec v\times \vec B,\]
+where $c$ is some constant (not the speed of light). Classically, we have that $\vec E$ and $\vec B$ satisfy Maxwell's equations. Let $\rho$ be a charge density and $\vec j$ be the charge current. This gives us four laws:
+\begin{itemize}
+    \item The Gauss law for electric charge; in integral form (over a region $\Omega$):
+    \[\int_{\partial \Omega} \vec E\cdot d\vec S = 4\pi \int_\Omega \rho dv\]
+    In differential form:
+    \[\Div \vec E = 4\pi\rho\]
+    \item The Gauss law for magnetism; in integral form:
+    \[\int_{\partial \Omega} \vec B\cdot d\vec S = 0\]
+    In differential form:
+    \[\Div \vec B = 0\]
+    \item Faraday's Laws of induction; integral form (let $\partial D$ be a loop bounding a region $D$):
+    \[\int_{\partial D} \vec E d\ell = -\frac{1}{c}\frac{d}{dt}\int_{D}\vec B\cdot d\vec S\]
+    In differential form,
+    \[\curl \vec E + \frac{1}{c}\pd{t}\vec B = 0\]
+    \item Ampere's Circular Law:
+    \[\int_{\partial D} \vec B\cdot d\ell = \frac{4\pi}{c}\int_{D}\vec j\cdot d\vec S + \frac{1}{c}\pd{t}\int_{D}\vec E\cdot d\vec S\]
+    In differential form,
+    \[\curl\vec B - \frac{1}{c}\pd{t}\vec E = \frac{4\pi}{c}\vec j\]
+\end{itemize}
+Now, we organize the four (differential) relations in terms of differential forms and the exterior derivative on $\R^3$. Identifying $\vec E$ and $\vec B$ as differential forms, we observe that $d \vec B  = 0$ (where $d$ is the exterior derivative). deRham Cohomology implies that there exists some $\vec A$ such that $\vec B = d\vec A = \curl \vec A$. Similarly, since 
+\begin{align*}
+    0 &= \curl \vec E + \frac{1}{c}\pd{t}\vec B\\
+    &=\curl \vec E + \frac{1}{c}\pd{t}\curl \vec A\\
+    &=\curl \left(\vec E + \frac{1}{c}\pd{t}\vec A\right)\\
+    &=d\left(\vec E + \frac{1}{c}\pd{t}\vec A\right)
+\end{align*}
+so if we apply deRham Cohomology once again, we have that there exists $\vhi:\R^3\to \R$ such that $\nabla_x \vhi = \vec E + \frac{1}{c}\pd{t}\vec A$.
+MISSING STUFF
+\end{document}

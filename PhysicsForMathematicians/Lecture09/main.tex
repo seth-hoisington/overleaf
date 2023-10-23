@@ -65,7 +65,6 @@
 \begin{document}
 
 \maketitle
-\textbf{REPLACE "v" WITH NU AND "p" WITH RHO IN INDICES}
 \section{Recall: The Lorentz boost along $x_1$-axis}
 \[\left\{\begin{aligned}
     c\tilde{t}&=\frac{\frac{y}{c}x_1 + ct}{\sqrt{1-\frac{u^2}{c^2}}}\\
@@ -77,7 +76,7 @@
     \tilde{p}_1&=\frac{p_1+\frac{u}{c} \frac{E}{c}}{\sqrt{1-\frac{u^2}{c^2}}}\\
     \tilde{p}_2&= p_2\\
     \tilde{p}_3&= p_3
-\end{aligned}\right.\Rightarrow \]
+\end{aligned}\right.\]
 \section{More about 4-vectors and 4-tensors}
 We work in $\R^4$ with coordinates $(x^0 = ct,x^1, x^2, x^3)$. This space is called Minkowski space-time. The Lorentzian is defined by $\Delta\ell^2  = (\Del x^0)^2 - (\Del x^1)^2 - (\Del x^2)^2-(\Del x^3)^2$. Let 
 \[(g_{\mu v})=\begin{pmatrix}
@@ -87,11 +86,10 @@ We work in $\R^4$ with coordinates $(x^0 = ct,x^1, x^2, x^3)$. This space is cal
     0& 0 & 0 & -1
 \end{pmatrix}\]
 Then, $\Delta\ell = g_{\mu v}\Delta x^\mu \Delta x^v$. The indefinite inner product
-\[a\dot\hat a = a^0\hat a^0-a^1\hat a^1- a^2\hat a^2-a^3\hat a^3\]
-The linear transformation which preserves the Lorentzian inner product are called Lorentzian transformations, and are all of the form $x^\mu\mapsto \tilde x^\mu = \sum_{v=1}^3 a^\mu_v x^v$. $H$ is Lorentzian if and only if $g_{\mu v} a^\mu_p a^v_\sigma = g_{p\sigma}$ which holds if and only if the column vectors $a_\mu$
-Missing stuff
-\nl
-The Lorentzian $\Delta\ell$ without $\star$ translations are allowed. The most general transformation between coordinates of inertial frames are affine transformation with lorentzian linear part.
+\[a\cdot\hat a = a^0\hat a^0-a^1\hat a^1- a^2\hat a^2-a^3\hat a^3\]
+The linear transformation which preserves the Lorentzian inner product are called Lorentzian transformations, and are all of the form $x^\mu\mapsto \tilde x^\mu = \sum_{\nu=0}^3 a^\mu_\nu x^\nu$. $H$ is Lorentzian if and only if $g_{\mu \nu} a^\mu_\rho a^\nu_\sigma = g_{\rho\sigma}$. It follows from this fact that if $a_\mu$ is a column vector of the matrix $(a_\mu^\nu)$, then
+\[a_0\cdot a_0 = 1,  a_\rho\cdot a_\rho = -1\quad\text{for $\mu = 1,2,3$, and for $\rho\neq \sigma$}\quad a_\rho\cdot a_\sigma = 0.\]
+The set of all such Lorentz transformations forms a Lie group, called the Lorentz group, $O(1,3)$. The Lorentzian $\Delta\ell$ without translations are allowed. The most general transformation between coordinates of inertial frames are affine transformation with lorentzian linear part.
 
 \begin{defn}
     A \textbf{4-vector} is any 4-component quantity $(A_0,A_1,A_2,A_3)$ depending on an inertial frame such that when passing to another inertial frame $\tilde K$ via (4), it transforms $A^\mu\to \tilde A^\mu = \sum^3_{v=0}a^\mu_vA^v$.

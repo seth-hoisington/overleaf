@@ -1,0 +1,262 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{September 14, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+\newtheorem{prop}{Proposition}
+
+\begin{document}
+
+\maketitle
+\section*{Special Relativity}
+\subsection*{Fundamental principles of special relativity}
+\begin{enumerate}[label=\Alph*]
+    \item \textbf{Relativity principle in inertial frames:} All laws of nature and equations describing them are the same in all inertial frames. In other words, all inertial frames are identical.
+    \item \textbf{Independence of speed of light w.r.t the motion of a source in an inertial frame}. The speed of light in a vacuum is independent of the motion of the source and is the same in all directions
+\end{enumerate}
+Let $K$ and $K'$ be two inertial frames such that $K$ moves along the $x_1$-axis of $K'$ with speed $v$. We want to find the transformation between 2 space-time coordinate systems $(x,t)$ and $(x',t')$ with respect to $K$ and $K'$, and it turns out that these two principles alone are sufficient. Hence, we assume 
+\begin{equation}
+    x' = x'(x,t)\quad\text{and}\quad t' = t'(x,t).
+\end{equation}
+Principles A and B imply that (1) must satisfy the following 4 properties:
+\begin{itemize}
+    \item It sends straight lines (trajectories of free particles) to straight lines
+    \item The "light cone" in $K$: $\{(x,t)\,|\, c^2t^2 - x_1^2 - x_2^2 - x_3^2 = 0\}$ is sent to the "light cone" in $K'$, which is similarly defined in the coordinates $(x',t')$. This follows from the independence of the speed of light.
+    \item The transformation (1) corresponding to velocity $-v$ is the inverse of the transformation (1) corresponding to the velocity $v$ (as $K'$ moves with velocity $-v$ with respect to $K$, using the relativity principle again)
+    \item If we apply the transformation corresponding to velocity $-v$, then reflect the space coordinates $(x_1,x_2,x_3)\mapsto (-x_1,x_2, x_3)$, we get the transformation corresponding to $v$.
+\end{itemize}
+If we assume that $(0,0)\mapsto (0,0)$, it follows that the transform $(x,t)\mapsto (x',t')$ is linear with respect to $(x,t)$. So
+\[\begin{pmatrix}
+    x'\\
+    t'
+\end{pmatrix}=A(v)\begin{pmatrix}
+    x\\
+    t
+\end{pmatrix}\]
+From linearity and Property 2, it follows that 
+\begin{equation}
+    (ct')^2-\|x'\|^2 = \lambda(v)((ct)^2 - \|x\|^2)
+\end{equation}
+Furthermore, Property 3 tells us that $\lambda(v)\lambda(-v) = 1$. Finally, property 4 allows us to conclude that $\lambda(-v) = \lambda(v)$. Since the frames are equal at zero, for zero velocity, we have $K=K'$. Thus, $\lambda(0) = 1$. We observe that $\lambda(v)$ as a result of the fact that $A$ is linear and continuous in $v$ (where continuity of $A$ with respect to $v$ is an additional assumption consistent with our physical reality).
+\nl
+Continuity of $A$ with respect to $v$ can be observed 
+\nl
+\begin{rk}
+    In general, the indefinite orthogonal group $O(p,q)$ is the real matrix Lie group of linear transformations which preserve a non-degenerate symmetric bilinear form with signature $(p,q)$. More specifically, for a real-vector space of dimension $p+q$, such a form can be described in a coordinate system $(x^1,\dots, x^n)$ by 
+    \[(dx^1)^2 + \cdots + (dx^p)^2 - \left((dx^{p+1})^2 + \cdots + (dx^{p+q})^2\right)\]
+    Alternatively, a real-valued matrix $A$ lies in $O(p,q)$ if and only if $A^TJA = J$, where 
+    \[J = \begin{pmatrix}
+        I_p & 0 \\
+        0 & -I_q
+    \end{pmatrix}\]
+    with $I_k$ being the $k\times k$ identity matrix. Note that the identity, $I_{p+q}\in O(p,q)$. We also can see that the determinant of an element of $O(p,q)$ is always $\pm 1$. Like in the case of the standard orthogonal group, the matrices with determinant $1$ form a normal subgroup of $O(p,q)$, and the subgroup is similarly denoted $SO(p,q)$.
+\end{rk}
+Therefore, the transformation $A(v)$ is an element of $O(1,3)$ since it preserves the bilinear form $d(ct)^2 - dx_1^2 - dx_2^2 - dx_3^2$. In particular, $A(v)$ is an element of the connected component of $O(1,3)$ containing the identity, $SO(1,3)$. The space $O(1,3)$, given its particular significance to our physical reality, is specially named the Lorentz group.
+\nl
+Now, we find an explicit expression for $A(v)$ in terms of $v$. We may assume that $x_1$ is the only spatial variable. Then, we have that $A(v)\in O(1,1)$, the indefinite orthogonal group with signature $(-1,1)$. In particular, we require that $A(v)\in SO(1,1)$ and also that $A(v)$ be orthochronous, or preserving the direction of time). Then, we have that $(ct')^2-(x')^2 = (ct)^2 - x^2$. Visualizing this in the 2D-plane, Our transformation must place $(x,ct)$ and $(x',ct')$ along the same hyperbola. If we let $\al\in \R$ be the "hyperbolic angle," we have that
+\[\left\{\begin{aligned}
+    x' &= \cosh(\al)x + \sinh(\al)ct\\
+    ct' &= \sinh(\al)x + \cosh(\al)ct
+\end{aligned}\right.\]
+Recalling that the inertial frame $K$ is moving with velocity $v$ as measured in the reference frame $K'$, then the position of the point $(x,t) = (0,t)$ in $K$ is mapped to the point $(vt',t')$. By the above relationships, this yields the relationships $vt' = \sinh(\al)ct$ and $t' = \cosh(\al)t$. Hence,
+$v= \frac{vt'}{t'} = c\tanh(\al)$. Thus, we have
+\begin{align*}
+    \cosh(\al) &= \frac{1}{\sqrt{1-\tanh^2(\al)}} = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}\\
+    \sinh(\al) &= \tanh(\al)\cosh(\al) = \frac{\frac{v}{c}}{\sqrt{1-\frac{v^2}{c^2}}}
+\end{align*}
+Which allows us to conclude that
+\begin{align*}
+    x'(x,t)&=\frac{x+vt}{\sqrt{1-\frac{v^2}{c^2}}}\\
+    t'(x,t) &=\frac{\frac{v}{c^2}x + t}{\sqrt{1-\frac{v^2}{c^2}}}
+\end{align*}
+This illuminates a particularly counter-intuitive consequence. Two simultaneous events in the reference frame $K$ (i.e. $t_1 = t_2$) will not occur simultaneously in $K'$, depending on the events' positions. This is well-known as the effect of space-contraction and time-dilation. 
+\begin{ex}
+    Rod of length $L$ along the direction of motion
+\end{ex}
+We may align our spatial coordinate system in $\R^3$ such that the rod is placed along one coordinate axis; i.e. if the ends of the rod are at the points $A$ and $B$, we may rotate the coordinate system such that $(x_A^1, x_A^2, x_3) = (0,0,0)$ and $(x_B^1, x_B^2, x_B^3) = (L,0,0)$. This allows us to apply our results in 1D using $(x^1,t)$ as our coordinates. We place one end of the rod at $(x_A,t_A) = (0,0)$ and the other end at the point $(x_B,t_B) = (L,0)$ in the reference frame $K$. Then, 
+\begin{align*}
+    x_B'&=\frac{L}{\sqrt{1-\frac{v^2}{c^2}}}\\
+    t_B' &=\frac{\frac{v}{c^2}L}{\sqrt{1-\frac{v^2}{c^2}}}
+\end{align*}
+Recall that this means that at time $t_B'$, the end of the rod is at the point $x_B$. Recalling the fact that simultaneous events (such as observing the positions of each end of the rod at time zero) do not occur at the same point in time in our transformed reference frame, we need to find the point in time such that endpoint $A$ of the rod is measured at time $t_B'$. Since our rod remains stationary in the reference frame $K$, we must find the time $t_C$ in $K$ such that $(0,t_C)\mapsto (x_C', t_B')$ (i.e. $t_C'=t_B'$). Therefore, we see that
+\[t'(0,t_C) = \frac{t_C}{\sqrt{1-\frac{v^2}{c^2}}} = t_B' = \frac{\frac{v}{c^2}L}{\sqrt{1-\frac{v^2}{c^2}}},\]
+so $t_C = \frac{v}{c^2}L$. Now we can find $x_C'$:
+\begin{align*}
+    x_C'&= x'\left(0,\frac{vL}{c^2}\right)\\
+        &= \frac{v\left(\frac{v}{c^2}L\right)}{\sqrt{1-\frac{v^2}{c^2}}}\\
+        &= \frac{\left(\frac{v^2}{c^2}L\right)}{\sqrt{1-\frac{v^2}{c^2}}}
+\end{align*}
+And now, we can calculate
+\begin{align*}
+    L' &= x_B' - x_C'\\
+    &= \frac{L}{\sqrt{1-\frac{v^2}{c^2}}} - \frac{\left(\frac{v^2}{c^2}L\right)}{\sqrt{1-\frac{v^2}{c^2}}}\\
+    &= \frac{\left(1-\frac{v^2}{c^2}\right)L}{\sqrt{1-\frac{v^2}{c^2}}}\\
+    &= L\sqrt{1-\frac{v^2}{c^2}}
+\end{align*}
+Incredibly, the rod is physically shorter in the reference frame $K'$; the moving things in our world appear to us shorter than what we would observe if we were moving at their speed alongside them!
+\nl
+Returning to three-dimensions, applying our one-dimensional results along the $x_1$-axis, we find that the reference frame $K'$ (with velocity as before now denoted by $u$) is described by the following coordinates:
+\[\left\{\begin{aligned}
+    t'&=\frac{\frac{u}{c^2}x_1 + t}{\sqrt{1-\frac{u^2}{c^2}}}\\
+    x_1'&=\frac{x_1+ ut}{\sqrt{1-\frac{u^2}{c^2}}}\\
+    x_2'&= x_2\\
+    x_3'&= x_3
+\end{aligned}\right.\]
+Now, assuming a constant velocity $u$, we find that
+\[\left\{\begin{aligned}
+    dt'&=\frac{\frac{u}{c^2}dx_1 + dt}{\sqrt{1-\frac{u^2}{c^2}}}\\
+    dx_1'&=\frac{dx_1+ udt}{\sqrt{1-\frac{u^2}{c^2}}}\\
+    dx_2'&= dx_2\\
+    dx_3'&= dx_3
+\end{aligned}\right.\]
+Consider a point moving over time in the reference frame $K$ with $v_i$ denoting the quantity $\frac{dx_i}{dt}$. By the chain rule, we may evaluate the derivatives $\frac{dx_i'}{dt'} = \bigslant{\frac{dx_i'}{dt}}{\frac{dt'}{dt}}$. Thus, we may express the velocity in the reference frame $K'$ as
+\[\left\{\begin{aligned}
+    v_1' = \frac{dx_1'}{dt'}&=\frac{v_1+u}{1+\frac{uv_1}{c^2}}\\
+    v_2' = \frac{dx_2'}{dt'}&=\frac{v_2\sqrt{1-\frac{u^2}{c^2}}}{1+\frac{uv_1}{c^2}}\\
+    v_3' = \frac{dx_3'}{dt'}&=\frac{v_3\sqrt{1-\frac{u^2}{c^2}}}{1+\frac{uv_1}{c^2}}\\
+\end{aligned}\right.\]
+\section*{Derivation of the Relativistic formulas for energy and momentum via Lagrangian Mechanics}
+Akin to classical mechanics, we wish to define an action
+\[ S(x, v) = \int_{t_0}^{t_1} L(x,v)dt\]
+where $x(t_i) = x_i$ and $x'(t) = v(t)$. We impose an assumption that $|v(t)|<c$ which implies that $c^2(t_0-t_1)^2 > |x_1-x_0|^2$. We also want the following properties to hold:
+\begin{itemize}
+    \item The action should be Lorentz invariant ($S(x) = S(x')$)
+    \item For small velocities ($v<<c$), the functional should yield the motion as governed by Newtonian mechanics
+\end{itemize}
+We recall that the first condition is satisfied by any constant multiple of the Lorentzian "arc length" formula $a\sqrt{c^2dt^2 - dx_1^2 - dx_2^2 -dx_3^2}$ for any quantity $a$. Analogously, the quantity $a\sqrt{c^2 - \frac{dx_1}{dt}^2 -\frac{dx_2}{dt}^2-\frac{dx_3}{dt}^2} dt= a\sqrt{c^2 - |v|^2} dt$ is also conserved. Thus, we let $L(x,v) = ac\sqrt{1 - \frac{|v|^2}{c^2}}$. Now, we simply choose $a$ independent of $v$ such that the Lagrangian satisfies the second condition. Using the 1st-order Taylor approximation $\sqrt{1-x^2} \approx 1-\frac{1}{2}x^2$, for $v<<c$, we have $L(x,v) \approx ac - \frac{a|v|^2}{2c}$. If we choose $a = -mc$, then we find that $L(x,v) \approx -mc^2 + \frac{m|v|^2}{2}$. Noting that the Euler-Lagrange equation is trivially satisfied for the fixed quantity $-mc^2$ for every trajectory, then for $v<<c$, we have that $L(x,v)$ determines the same trajectories as the classical Lagrangian $\frac{m|v|^2}{2}$. Hence, we define the relativistic Lagrangian:
+\[L(x,v) = -mc^2 \sqrt{1-\frac{|v|^2}{c^2}}\]
+The corresponding conjugate momentum is given by
+\[p = \pd{v}L = \frac{mv}{\sqrt{1-\frac{|v|^2}{c^2}}}\]
+Alternatively, we may write $p(v) = M(v)v$ where $M(v) =  \frac{m}{\sqrt{1-\frac{|v|^2}{c^2}}}$. Interestingly, this definition gives relativistic particles an "effective" mass which depends on velocity. Therefore, mass is also subject to similar dilation and contraction effects as time and space!
+\nl
+We may now describe the trajectories according to the relativistic Lagrangian. Recall that we wanted trajectories in classical mechanics to remain trajectories in the relativistic setting. Indeed, we have
+\begin{align*}
+    \pd{t}\pdof{L}{v} - \pdof{L}{x} &= \pd{t}p - 0\\
+    &=\pd{t}M(v) v
+\end{align*}
+Recall that the trajectory of a free particle in the classical sense is characterized exactly as having a constant velocity. If we assume that the velocity $v$ is constant with respect to time for some trajectory $(x,v)$, then we have that $\pd{t}L_v = \pd{t}M(v)v  = 0$. Therefore, constant-velocity paths are trajectories for the relativistic Lagrangian.
+\nl
+Note that $L$ is an autonomous Lagrangian, so by Example 5 from Lecture 1, the quantity $E(x,v) = vp(v) - L$ is a first integral for the Lagrangian system. This quantity plays the role of energy for a relativistic system:
+\[E(x,v) = \frac{m|v|^2}{\sqrt{1-\frac{|v|^2}{c^2}}} + mc^2\sqrt{1-\frac{|v|^2}{c^2}} = \frac{mc^2}{\sqrt{1-\frac{|v|^2}{c^2}}} = M(v)c^2\]
+When $v=0$, or when a particle is at rest, we recover the most famous equation of all time:
+\[E = mc^2\]
+Additionally, When $v<<c$, we find that 
+\begin{align*}
+    E(x,v)&= \frac{m|v|^2}{\sqrt{1-\frac{|v|^2}{c^2}}} + mc^2\sqrt{1-\frac{|v|^2}{c^2}}\\
+    &\approx \frac{m|v|^2}{1} + mc^2\left(1-\frac{|v|^2}{2c^2}\right)\\
+    &=mc^2 + m|v|^2 - \frac{1}{2}m|v|^2\\
+    &=mc^2 + \frac{1}{2}m|v|^2
+\end{align*}
+Thus, for small velocities, the relativistic energy quantity is modeled as the sum of the rest energy $mc^2$ and the classical kinetic energy. We may also describe the relation between energy, momentum, and mass:
+\begin{align*}
+    \frac{E^2}{c^2} - |p|^2&= \frac{m^2c^2}{1-\frac{|v|^2}{c^2}} - \frac{m^2|v|^2}{1-\frac{|v|^2}{c^2}}\\
+    &=\frac{m^2c^2\left(1-\frac{|v|^2}{c^2}\right)}{1-\frac{|v|^2}{c^2}}\\
+    &=m^2c^2
+\end{align*}
+Therefore, 
+\[E = c\sqrt{|p|^2 + m^2c^2}.\]
+Now, we want to understand how the quantities $E$ and $p$ change under Lorentz transformation. Let $K$ and $K'$ be the inertial frames as described before (using the variable $u$ for the frame velocity).
+\begin{prop}
+    The 4-dimensional quantity $\left(\frac{E}{c},p\right)$ in the frame $K$ transforms to the quantity $\left(\frac{E'}{c},p'\right)$ via the Lorentz Boost:
+    \[\left\{\begin{aligned}
+        \frac{E'}{c}&=\frac{\frac{u}{c}p_1 + \frac{E}{c}}{\sqrt{1-\frac{u^2}{c^2}}}\\
+        p'_1&=\frac{p_1+\frac{u}{c} \frac{E}{c}}{\sqrt{1-\frac{u^2}{c^2}}}\\
+        p'_2&= p_2\\
+        p'_3&= p_3
+    \end{aligned}\right.\]
+\end{prop}
+\begin{proof}
+    Let $v$ and $v'$ be the velocities of a particle $x$ and its analogue $x'$ in the frames $K$ and $K'$ respectively. We first expand the following quantity:
+    \begin{align*}
+        \sqrt{1-\frac{|v'|^2}{c^2}} &= \sqrt{1-\frac{\left(\frac{v_1}{c}+\frac{u}{c}\right)^2 + \frac{v_2^2 + v_3^2}{c^2}\left(1-\frac{u^2}{c^2}\right)}{\left(1+\frac{v_1u}{c^2}\right)^2}}\\
+        &= \sqrt{\frac{\left(1+\frac{v_1u}{c^2}\right)^2-\left(\frac{v_1}{c}+\frac{u}{c}\right)^2 - \frac{v_2^2 + v_3^2}{c^2}\left(1-\frac{u^2}{c^2}\right)}{\left(1+\frac{v_1u}{c^2}\right)^2}}\\
+        &= \sqrt{\frac{\left(\left(1+\frac{v_1u}{c^2}\right)-\left(\frac{v_1}{c}+\frac{u}{c}\right)\right)\left(\left(1+\frac{v_1u}{c^2}\right)+\left(\frac{v_1}{c}+\frac{u}{c}\right)\right) - \frac{v_2^2 + v_3^2}{c^2}\left(1-\frac{u^2}{c^2}\right)}{\left(1+\frac{v_1u}{c^2}\right)^2}}\\
+        &= \sqrt{\frac{\left(1-\frac{u}{c}+\frac{v_1}{c}\left(1-\frac{u}{c}\right)\right)\left(1+\frac{u}{c}+\frac{v_1}{c}\left(1+\frac{u}{c}\right)\right) - \frac{v_2^2 + v_3^2}{c^2}\left(1-\frac{u^2}{c^2}\right)}{\left(1+\frac{v_1u}{c^2}\right)^2}}\\
+        &= \sqrt{\frac{\left(1-\frac{u}{c}\right)\left(1-\frac{v_1}{c}\right)\left(1+\frac{u}{c}\right)\left(1+\frac{v_1}{c}\right) - \frac{v_2^2 + v_3^2}{c^2}\left(1-\frac{u^2}{c^2}\right)}{\left(1+\frac{v_1u}{c^2}\right)^2}}\\
+        &=\sqrt{\frac{\left(1-\frac{u^2}{c^2}\right)\left(1-\frac{v_1^2}{c^2}\right) - \frac{v_2^2 + v_3^2}{c^2}\left(1-\frac{u^2}{c^2}\right)}{\left(1+\frac{v_1u}{c^2}\right)^2}}\\
+        &=\frac{\sqrt{\left(1-\frac{u^2}{c^2}\right)\left(1-\frac{|v|^2}{c^2}\right)}}{1+\frac{v_1u}{c^2}}
+    \end{align*}
+    Where in the last step, we are using that $v_1u<c^2$. Therefore, we conclude that
+    \[\sqrt{1-\frac{|v'|^2}{c^2}}=\frac{\sqrt{\left(1-\frac{u^2}{c^2}\right)\left(1-\frac{|v|^2}{c^2}\right)}}{1+\frac{v_1u}{c^2}}\]
+    Now, we consider $p'$. By definition, we have
+    \begin{align*}
+        p_1'&= \frac{mv_1'}{\sqrt{1-\frac{|v'|^2}{c^2}}}\\
+        &=\frac{m\frac{v_1+u}{1+\frac{v_1u}{c^2}}}{\frac{\sqrt{\left(1-\frac{u^2}{c^2}\right)\left(1-\frac{|v|^2}{c^2}\right)}}{1+\frac{v_1u}{c^2}}}\\
+        &=\frac{m(v_1+u)}{\sqrt{1-\frac{u^2}{c^2}}\sqrt{1-\frac{|v|^2}{c^2}}}\\
+        &=\frac{1}{\sqrt{1-\frac{u^2}{c^2}}}\left(\frac{mv_1}{\sqrt{1-\frac{|v|^2}{c^2}}} + \frac{u}{c^2}\frac{mc^2}{\sqrt{1-\frac{|v|^2}{c^2}}}\right)\\
+        &=\frac{1}{\sqrt{1-\frac{u^2}{c^2}}}\left(p_1 + \frac{u}{c^2}E_1\right)
+    \end{align*}
+    Now, we consider $E_1'$. By definition,
+    \begin{align*}
+        E_1'&=\frac{mc^2}{\sqrt{1-\frac{|v'|^2}{c^2}}}\\
+        &=mc^2\left(\frac{1+\frac{v_1u}{c^2}}{\sqrt{\left(1-\frac{u^2}{c^2}\right)\left(1-\frac{|v|^2}{c^2}\right)}}\right)\\
+        &=\frac{1}{\sqrt{1-\frac{u^2}{c^2}}}\left(\frac{mc^2}{\sqrt{1-\frac{|v|^2}{c^2}}}+\frac{mv_1 u}{\sqrt{1-\frac{|v|^2}{c^2}}}\right)\\
+        &=\frac{1}{\sqrt{1-\frac{u^2}{c^2}}}(E_1 + p_1u).
+    \end{align*}
+    Finally, for $i=2,3$, we have
+    \begin{align*}
+        p_i'&= \frac{mv_i'}{\sqrt{1-\frac{|v'|^2}{c^2}}}\\
+        &=\frac{mv_i\sqrt{1-\frac{u^2}{c^2}}}{1+\frac{uv_1}{c^2}}\left(\frac{1+\frac{v_1u}{c^2}}{\sqrt{\left(1-\frac{u^2}{c^2}\right)\left(1-\frac{|v|^2}{c^2}\right)}}\right)\\
+        &=\frac{mv_i}{\sqrt{1-\frac{|v|^2}{c^2}}}\\
+        &= p_i
+    \end{align*}
+\end{proof}
+\end{document}

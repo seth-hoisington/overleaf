@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\curlyL}{\mathcal L}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians, Lecture 11}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{September 28, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+
+\begin{document}
+
+\maketitle
+
+\section{Maxwell's Equations in terms of differential forms}
+\[\left\{\begin{aligned}
+    \Div \vec E &=4\pi\rho\\
+    \Div \vec B &=0\\
+    \curl \vec E + \frac{1}{c}\pdof{\vec B}{t} &= 0\\
+    \curl \vec B - \frac{1}{c}\pdof{\vec E}{t} &= \frac{4\pi}{c}\vec j
+\end{aligned}\right.\]
+where $\rho$ and $\vec j$ are given. You expect the continuity equation for the charge if and only if $(\rho,\vec j)$ is a conserved current, i.e. 
+\[\pdof{\rho}{t}+\Div_x\vec j = 0.\]
+Indeed, the continuity equation follows from the first and fourth equations:
+\begin{align*}
+    \pdof{\rho}{t}&=\frac{1}{4\pi}\Div\pd{t}\vec E\\
+    &=\frac{c}{4\pi}\Div\left(\curl\vec B - \frac{4\pi}{c}\vec j\right)\\
+    &=\frac{c}{4\pi}\left(0 - \Div\frac{4\pi}{c}\vec j\right)\\
+    &=\Div \vec j
+\end{align*}
+\section{Hodge-* operator}
+Let $V$ be an oriented $n$-dimensional vector space endowed with a symmetric form $g$. Some prototypes are $V=\R^3$ with the Euclidean metric and $\R^4$ with the Lorentzian metric (of signature $(1,3)$).
+\nl
+The form $g$ induces a nondegenerate symmetric form on the exterior algebra $\Lambda V = \bigoplus_k \Lambda^kV$ such that $\Lambda^{k_1}V\perp \Lambda^{k_2}V$ if $k_1\neq k_2$. We define
+\[g(v_1\wedge \cdots \wedge w_k, v_1\wedge\cdots \wedge v_k) = \det(g(v_1,w_j))_{i,j=1}\]
+The form $g$ and the orientation induces the canonical volume form $\text{Vol}_g\in\Lambda$ on $V$ such that for an oriented, $g$-orthonormal basis for $V$.
+\nl
+Then, the Hodge-$\star$ operator $*:\Lambda^kV\to \Lambda^{n-k}V$ defined as follows. For any $w\in \Lambda^kV$, there exists a unique $*w\in \Lambda^{n-k}V$ such that for every $v\in \Lambda^kV$ such that $\text{Vol}_g(v\wedge\star w) = g(v,w)$. 
+\nl
+Why must $\star w$ exist and be unique? Since $\dim\Lambda^kV = \dim\Lambda^{n-k}V = \binom{n}{k}$, bijectivity follows from injectivity by rank-nullity. By nondegeneracy, there exists unique $w\in \Lambda^kV$ such that $\al(v) = g(w,v)$, by the Riesz-representation theorem. Therefore, we have some map $\al(v) = \text{Vol}_g(v\wedge *w)$
+MISSING STUFF
+
+For $p\in \{0,\dots, n\}$, we have that
+\[\star(e_1\wedge \cdots \wedge e_p) = \text{Vol}_g(e_1\wedge \cdots \wedge e_n)e_{p+1}\wedge \cdots \wedge e_n.\]
+Hence, $\star\star = (-1)^{p(n-p)}Id$. If $g$ has signature $(1,n-1)$ for a $g$-orthogonal basis $(e_0,\dots,e_{n-1})$, we have that
+\[\star(e_0\wedge\cdots\wedge e_p) = (-1)^p\text{Vol}_g(e_0\wedge\cdots\wedge e_n)e_{p+1}\wedge \cdots \wedge e_{n-1},\]
+and similarly,
+\[MISSING\]
+Now, suppose that we are in $\R^3$ with the standard inner product. Given a vector field $\vec F = \sum_\mu F^\mu\pd{x^\mu}$, let $\omega_{\vec F} = F_\mu dx^\mu$, where $\w_{\vec F}$ is the canonical form under the identification of $T_q^*\R^3 = T_q\R^3$. Then, the divergence, curl, and gradient operators can be represented using the exterior derivative and the Hodge-$*$ operator. Indeed, for some $\vhi\in C^\infty(\R^3)$, we have that
+\begin{align*}
+    \w_{\nabla\vhi} &= d\vhi\\
+    \star\w_{\curl\vec F} &= d\w_{\vec F}\\
+    \Div\vec F &= \star d\star\w_{\vec F}
+\end{align*}
+\subsection{Magnetic vector potential and electromagnetic potential}
+We recall that every closed form in $\R^n$ is exact. By Maxwell's second equation, we have that $\star d\star\vec B = \Div\vec B = 0$, so $d\star\vec B = 0$, giving us that there exists some form $\al$ such that $d\al = \star\w_{\vec B}$. $\al$ is a 1-form, so there exists a vector $\vec A$ such that $\al = \w_{\vec A}$, meaning that
+$d\al = d\w_{\vec A} = \star\w_{\vec B}$. Since $d\w_{\vec A} = \star \w_{\curl\vec A}$, we have that $\curl\vec A = \vec B$.
+\nl
+Then $\vec A$ is called the electromagnetic potential. $\vec A$ is not uniquely defined, since we may add any vector field for which the curl is zero. By a similar argument, this field is a gradient of some function. In other words, there exists functions $f$ such that $\tilde{\vec A} = \vec A - \text{grad}_xf$ is also a magnetic potential for $\vec B$.
+\nl
+Now, we consider Maxwell's third equation. We have that
+\begin{align*}
+    \curl \vec E + \frac{1}{c}\pdof{\vec B}{t} &=\\
+    \curl \left(\vec E + \frac{1}{c}\pd{t} \vec A\right) &=0
+\end{align*}
+Hence, the form $\sigma$ corresponding to $\vec E + \frac{1}{c}\pd{t} \vec A$ is a closed 1-form, so there exists some $\vhi$ such that $-\text{grad}\vhi = \sigma$.
+\begin{defn}
+    The \textbf{electromagnetic potential} is the 4-vector (in the sense we studied) given by $(A^0,A^1,A^2,A^3) = (\vhi,\vec A)$. The potential form is given by
+    \[A = A^0dx^0 - A^1dx^1 - A^2 dx^2 - A^3 dx^3 = A_0dx^0 + A_1dx^1 + A_2 dx^2 + A_3 dx^3\]
+\end{defn}
+\end{document}

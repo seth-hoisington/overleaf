@@ -10,7 +10,6 @@
 \usepackage{tikz-cd}
 \usepackage{bbm}
 \usepackage{graphicx}
-\usepackage{enumitem}
 
 \newcommand{\R}{\mathbb R}
 \newcommand{\N}{\mathbb N}
@@ -53,7 +52,7 @@
 \DeclarePairedDelimiter{\ang}{\langle}{\rangle}
 \title{MATH 689 - Physics for Mathematicians}
 \author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
-\date{September 14, 2023}
+\date{Sepember 5, 2023}
 
 \newtheorem{thm}{Theorem}
 \newtheorem{ex}{Example}
@@ -65,34 +64,31 @@
 \begin{document}
 
 \maketitle
-\section*{Special Relativity}
-\subsection*{Fundamental principles of special relativity}
-\begin{enumerate}[label=\Alph*]
-    \item \textbf{Relativity principle in inertial frames:} All laws of nature and equations describing them are the same in all inertial frames. In other words, all inertial frames are identical.
-    \item \textbf{Independence of speed of light w.r.t the motion of a source in an inertial frame}. The speed of light in a vacuum is independent of the motion of the source and is the same in all directions
-\end{enumerate}
-Let $K$ and $K'$ be two inertial frames such that $K$ moves along the $x$-axis with speed $v$. We want to find the transformation between 2 space-time coordinate systems $(x,t)$ and $(x',t')$ with respect to $K$ and $K'$, and it turns out that these two principles alone are sufficient. We consider
-\begin{equation}
-    x' = x'(x,t)\quad\text{and}\quad t' = t'(x,t)
-\end{equation}
-Principles A and B imply that (1) must satisfy the following 4 properties:
-\begin{itemize}
-    \item It sends straight lines (trajectories of free particles) 
-    \item 
-    \item The transformation (1) corresponding to velocity $-v$ is the inverse of the transformation (1) corresponding to the velocity $v$ (as $K'$ moves with velocity $-v$ with respect to $K$, using the relativity principle again)
-    \item 
-\end{itemize}
-From \ref{eqn1} it follows that it is linear with respect to $(x,t)$. So
-\[\begin{pmatrix}
-    x'\\
-    t'
-\end{pmatrix}=A(v)\begin{pmatrix}
-    x\\
-    t
-\end{pmatrix}\]
-From linearity and Property 2, it follows that 
-\begin{equation}
-    (ct')^2-\|x'\|^2 = \lambda(v)((ct)^2 - \|x\|^2)
-\end{equation}
-Besides $\lambda(0) = 1$ and 
+\section*{Last Time:}
+$\{F_i,F_j\} = 0$, $\{\vhi_i,\vhi_j\} = 0$, $\{F_i,\vhi_j\} = \delta_{ij}$.
+
+Let $a_{ij} = \{F_{ij},\vhi_{ij}\}$
+
+$N$ independent of $\sigma$. $\det(a_{ij}) \neq 0$.
+
+$\{F_m, \{\vhi_i,\vhi_j\}\}$ depends on $F$ only.
+
+
+LONG PROOF, DIDNT FOLLOW, GO BACK THROUGH LATER
+
+We have $(I,\psi)$ symplectic, also called action-angle. Then $\dot\lambda = \vec H(\lambda)\Leftrightarrow H(I), \dot I = 0 = -\pdof{H}{\psi} \& \dot\psi = \w(I) = \pdof{H}{I}$
+\section*{LFDAF Method of generating functions to construct action-angle variables}
+Consider the action
+\[S(q,t) = \min\left\{\int_{t_0}^tL(t,q(t),\dot q(t))dt\,\big|\,\text{$q(t)$ a trajectory}, q(t_0) = q_0,q(t_1) = q_1\right\}\]
+Then $\pdof{S}{q} + H\left(\pdof{S}{q},q,t\right) = 0$ where $H$ is the Hamiltonian corresponding to the Lagrangian. (see Arnold, p. 254).
+\nl
+There is a simpler way to find action-angle variables. If $(I,\vhi)$ are symplectic coordinates, then the form $pdq - Id\vhi$ is closed because 
+\[d(pdq - Id\vhi) = dp\wedge dq - dI\wedge d\vhi = 0\]
+If $\gamma_k$ is a generator of $\pi_1(\mathbb{T}^n)$, then
+$\int_{\gamma_k}pdq - Id\vhi$ is independent of representative in $\pi_1(\mathbb{T}^n)$, so we let
+\begin{align*}
+    \tilde C_{k^i} &= \int_{\gamma_k}pdq - Id\vhi\\
+    &=\int_{\gamma_k}pdq - I_k\intd\vhi_k\\
+    &\Rightarrow 
+\end{align*}
 \end{document}

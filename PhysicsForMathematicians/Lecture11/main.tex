@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\curlyL}{\mathcal L}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Div}{div}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{September 26, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+
+\begin{document}
+
+\maketitle
+
+Let $S^0$ be a density of a conserved quantity on $\R^{n+1} = (t,x)$. For example, a density of energy, momentum, charge, or mass. To $S^0$, one can assign a vector-valued quantity $\bar S = (S^1,\dots, S^n)$, the current density. In the previous example, $S^0 = \rho$, $\bar S = \rho v$.
+\nl
+The conservation law will take the form
+\[\pdof{ S^0}{t} + \sum_{i=1}^n \pdof{S^i}{x^i} = 0 \Leftrightarrow -\frac{d}{ds}\int_\Omega Sdx = \int_{\partial \Omega} \bar S\cdot \hat h dS\]
+Then the $n+1$-dimensional quantity $\sigma = (S^0, S^1,\dots,S^n)$ is called the conserved current/the conserved flux, and it satisfies $\Div_{(t,x)}\sigma= 0$. If we assume that $S^i(t,x) \to 0$ as $|x| \to \infty$, sufficiently quickly, so that the integral converges, and if the "charge,"
+\[Q(t_0) = \int_{\{t=t_0\}} S^0(t,x)dx,\]
+then if $\sigma$ is conserved, then $Q$ is independent of $t_0$ (i.e. the charge is conserved).
+\nl
+Indeed, we have
+\[Q(t_1) - Q(t_0)\]
+FILL IN WITH PICTURE
+\nl
+If $n=0$, we are in the case of finite degrees of freedom. $(1)\Leftrightarrow \pdof{S^0}{t} = 0$, so $S^0$ is constant along solutions of E-L, meaning that $S^0$ is the first integral of E-L in the previous sense.
+\nl
+\begin{rk}
+    Trivially conserved quantities
+\end{rk}
+let $\psi^{k\ell}$ be an arbitrary tuple of functions depending on fields and derivatives such that $\psi^{\ell k} =- \psi^{k\ell}$. Let $S^\mu = \sum_{\ell}\pd{x^\ell}\psi^{\mu\ell}$. Then $(S^\mu)_{\mu = 0}^n$ is conserved (independent of the field), in that
+\begin{align*}
+    \sum_{\mu}\pdof{x^\mu}S^\mu &= \sum_{\mu,\ell}\frac{\partial^2}{\partial x^\mu \partial x^\ell}\psi^{\mu\ell}\\
+    &=\sum_{\mu<\ell}\frac{\partial^2}{\partial x^\mu \partial x^\ell}\psi^{\mu\ell} + \sum_{\ell<\mu}\frac{\partial^2}{\partial x^\mu \partial x^\ell}\psi^{\mu\ell}+\sum_{\mu}\frac{\partial^2}{\partial x^\mu \partial x^\mu}\psi^{\mu\mu}\\
+    &=\sum_{\mu<\ell}\frac{\partial^2}{\partial x^\mu \partial x^\ell}\psi^{\mu\ell} + \sum_{\mu<\ell}\frac{\partial^2}{\partial x^\mu \partial x^\ell}\psi^{\ell\mu}+0\\
+    &=\sum_{\mu<\ell}\frac{\partial^2}{\partial x^\mu \partial x^\ell}\left[\psi^{\mu\ell} + \psi^{\ell\mu}\right]\\
+    &=0
+\end{align*}
+Where $\psi^{\mu\ell} + \psi^{\ell\mu} = 0$ and $\psi^{\mu\mu} = 0$ by antisymmetry.
+\section{Energy-Momentum tensor}
+Assume that the Lagrangian density is independent of $(t,x)$. Namely, $\curlyL = \curlyL(u,\partial_x u)$, where $x\in \R^{n+1}$ (includes the "time" coordinate $ct$). Recall that for the case of finite degrees of freedom, then $L=L(q,\dot q)$ is the law of conservation of energy. Using the same idea, we want
+\[\sum_i\pd{x^i}\curlyL(u(x),\partial_xu(x)) = \pdof{\curlyL}{u}\pdof {u}{x^i} +\sum_k\pdof{\curlyL}{\partial(\partial_xu)}\frac{\partial^2u}{\partial x^i\partial x^k} = 
+\sum_{k,i}\pd{x^k}\left(\pdof{L}{(\partial_{x^k}u)}\right)\pdof{u}{x^i}+\pdof{\curlyL}{\partial(\partial_xu)}\frac{\partial^2u}{\partial x^i\partial x^k} = \sum_k\pd{x^k}\left(\sum_i\pdof{L}{(\partial_{x^k}u)}\pdof{u}{x^i}\right).\]
+Hence, 
+\[\sum_k\pd{x^k}\left(\sum_i\pdof{L}{(\partial_{x^k}u)}\pdof{u}{x^i} - \delta^k_iL\right) = 0\]
+Let $T^k_i = \partial_{x^i}u\pdof{L}{(\partial_{x^k}u)} - \delta^k_iL$. Then $\pd{x^k}T^k_i = 0$, so $(T^k_i)_{k=0}^n$ is a conserved current.
+\end{document}

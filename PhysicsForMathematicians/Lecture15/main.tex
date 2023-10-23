@@ -1,0 +1,136 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\curlyL}{\mathcal L}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians, Lecture 11}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{September 28, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+
+\begin{document}
+
+\maketitle
+
+\section{Electromagetic Potential}
+Recall from the previous lecture that $\Div_x\vec B = 0$ implies that there exists some $\vec A$ such that $\curl_x\vec A = \vec B$. Similarly, since $\curl_x(\vec E + \frac{1}{c}\pd{t}\vec A) = 0$, we know that there exists some function $\vhi$ such that $-\nabla_x f= \vec E + \frac{1}{c}\pd{t}\vec A$.
+\nl
+Note that $\vec A$ is defined up to transformation by some conservative vector field. Indeed, for a function $f$, we consider $\vec{\tilde A} = \vec A - \nabla_x f$. Then, since $\curl\circ\nabla  = 0$, we have that $\curl\vec{\tilde A} = \curl{\vec A} = \vec B$. Similarly, we must also transform $\vhi$. Let $\tilde \vhi = \vhi - \frac{1}{c}\pd{t}f$. Then,
+\begin{align*}
+    nrjwkngfjrwknf
+\end{align*}
+We usually work with the 4-vector electromagnetic potential, which is written in two forms:
+\begin{align*}
+    (A^\mu)_{\mu = 0}^3 &= (\vhi, \vec A) \\ (A_\mu)_{\mu = 0}^3 &= (\vhi, -\vec A)
+\end{align*}
+Let $\partial_\mu = \pd{x^\mu}$ and $\partial^\mu = g^{\mu\nu}\partial_\nu$. For $x_0 = ct$, we have
+\begin{align*}
+    \partial_\mu f &= \left\{\frac{1}{c}\pdof{f}{t},\pdof{f}{x^1},\pdof{f}{x^2},\pdof{f}{x^3}\right\}
+    \partial^\mu f &= \left\{\frac{1}{c}\pdof{f}{t},-\pdof{f}{x^1},-\pdof{f}{x^2},-\pdof{f}{x^3}\right\}
+\end{align*}
+A choice of electromagnetic potential is called a choice of gauge. For example, a classical gauge is the  \textbf{Lorenz gauge}(different person than Lorentz!), which satisfies
+\[\frac{1}{c}\pd{t}\vhi + \Div_x\vec{A} = 0 \Leftrightarrow \partial_\mu\vec A^\mu = 0.\]
+To find a Lorenz gauge from an arbitrary gauge $(\vhi,\vec A)$, we must find a function $f$ such that
+\begin{align*}
+    0 &= \frac{1}{c}\pdof{\tilde\vhi}{t} + \Div_x\vec {\tilde A}\\
+    &=\frac{1}{c}\pdof{\vhi}{t} + \frac{1}{c^2}\frac{\partial^2}{\partial t^2}f + \Div_x\vec {\tilde A} - \Div_x\nabla_x f\\
+\end{align*}
+MISSING STUFF
+\[F = (E^1dx^1+E^2dx^2 + E^3dx^3)\wedge x^0 + B^1dx^2\wedge dx^3 + B^2 dx^3\wedge dx^1 + B^3 dx^1\wedge dx^2\]
+Then, under gauge transformation, 
+\[-dA=F\Leftrightarrow \left\{\begin{aligned}
+    \curl_x\vec A &= \vec B\\
+    -\nabla_x\vhi &= \vec E + \frac{1}{c}\pd{t}\vec A
+\end{aligned}\right.\]
+Hence, we have $dF = 0$. MISSING CALCULATIONS
+\begin{prop}
+    $\Leftrightarrow *d*F = 4\pi j$.
+\end{prop}
+% \begin{rk}
+%     The operator $*d*$ is called the \textbf{codifferential}, and is often denoted $d^*$.
+% \end{rk}
+\begin{proof}
+    \begin{align*}
+        *F &= E^1dx^2\wedge dx^3 - E^2dx^1\wedge dx^3 + E^3dx^1\wedge dx^2 + B^1dx^0\wedge dx^1 + B^2dx^0\wedge dx^2 + B^3dx^0\wedge dx^3
+    \end{align*}
+    Then,
+    \begin{align*}
+        d(*F) &= \Div_x E dx^1\wedge dx^2\wedge dx^3 + \left(\pdof{E^1}{x^0} + \left(\pdof{B^2}{x^3} - \pdof{B^3}{x^2}\right)\right)dx^0\wedge dx^2\wedge dx^3\\
+        &\quad-\left(\pdof{E^2}{x^0} + \left(\pdof{B^1}{x^3} - \pdof{B^3}{x^1}\right)\right)dx^0\wedge dx^1\wedge dx^3+\left(\pdof{E^3}{x^0} + \left(\pdof{B^1}{x^2} - \pdof{B^2}{x^1}\right)\right)dx^0\wedge dx^1\wedge dx^2
+    \end{align*}
+    Write $j = \sum_{\mu=0}^3 j_\mu dx^\mu = \rho dx^0 - \frac{1}{c}\left(j^1dx^1 + j^2 dx^2 + j^3 dx^3\right)$. Then,
+    \begin{align*}
+        *d*F &= \Div_x E dx^0 + \left(\frac{1}{c}\pdof{E^1}{t} - (\curl_x\vec B)^1\right)dx^1\\
+        &\quad +\left(\frac{1}{c}\pdof{E^2}{t} - (\curl_x\vec B)^2\right)dx^2 + \left(\frac{1}{c}\pdof{E^3}{t} - (\curl_x\vec B)^3\right)dx^3\\
+        &=4\pi j
+    \end{align*}
+\end{proof}
+\begin{rk}
+    Assume that we are in a $(1,n-1)$-signature manifold. Then, let $\al$ be a $(p-1)$-form, and let $\be$ be a $p$-form. Let $Vol_g$ be the volume form. Then,
+    \[\int_\Omega g(d\al, \be)Vol_g = (1)^{p(n-p)}\int_\Omega g(\al, *d*\be)Vol_g - \int_{\partial\Omega}\al\wedge *\be\]
+\end{rk}
+\begin{rk}
+    The formal adjoint of $d$ is $d^* = (-1)^{p(n-p}*d*$. For $p=2$, $d^* = *d*$.
+\end{rk}
+Thus, the above calculation gives $d^*F =0$. Recall that $*$ is defined by 
+\[Vol_g(v\wedge *w) = g(v,w)\]
+for all $p$-multivectors $v,w\in \Lambda^pV$. In $(1,n-1)$-signature, $*Vol_g = -1$ and $*1 = -Vol_g$. Also, $**\be = (-1)^{(p-1)(n-p+1)}\be$. Thus, $v\wedge *w = -g(v,w)Vol_g$. 
+\end{document}
