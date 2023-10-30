@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\curlyL}{\mathcal L}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians, Lecture 11}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{September 28, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+
+\begin{document}
+
+\maketitle
+
+\section{Yang-Mills Functionals and Fields}
+\subsection{A crash course in principal bundles and associated bundles}
+Given a Lie group $G$ let $\pi:P\to G$ be a principal bundle with structure group $G$, or, shortly a principal $G$-bundle. Very briefly, $P$ is a fiber-bundle with the fiberwise right action of $G$ which is transitive and free.
+\begin{ex}
+    The bundle $F(M)$ if all frames of $TM$, with $\mathbb K = \R,\C$. More concretely, $\mathcal F(M) = \{(g,L)\,|\, q\in M, L\in \text{Iso}\,(\mathbb K^n,T_pM)\}$ with $G = GL_n(\mathbb K)$, where $\text{Iso}\,(A,B)$ is the set of linear isomorphisms from $A$ to $B$. The right action $R_a(q,L) = (q,L\circ a)$ for all $a\in GL_n(\mathbb K)$.
+\end{ex}
+\begin{ex}
+    Bundle $O_{p,q}(M)$ of orthonormal frames of $M$ with respect to a metric of signature $(p,q)$. Then $G = O_{p,q}$ and $(q,L)\in O_{p,q}(M)$ is a point $q$ and a frame $L:\mathbb K^n\to T_pM$.
+\end{ex}
+\begin{ex}
+    Trivial circle bundle. Let $\pi:M\times S^1\to M$. Let $G = U(1) = \{e^{i\theta}\,|\, \theta\in [0,2\pi) \}$. Then the right action $R_{e^{i\theta}}(q,z) = (q, ze^{i\theta})$.
+\end{ex}
+Let $\mathfrak g$ be the Lie algebra of the group $G$. Given $X\in \mathfrak g$, we can define a special vector field $\sigma(X)$ tangent to the fibers called the \textbf{fundamental vector field}. In particular, we define $\sigma(X)$ to be the generator of the action of the one-parametric subgroup $\exp(tX)$: $\sigma(X)_p = \frac{d}{dt}R_{\exp(tX)}(p)\big|_{t=0}$.
+\nl
+The principal connection on a principal bundle $P$ is a $\mathfrak g$-valued 1-form $\w$ on $P$ such that:
+\begin{enumerate}
+    \item $\w(\sigma(X)) = X$ for all $X\in \mathfrak g$
+    \item $(R_a)^* = \text{Ad}\,(a^{-1})\w$, $a\in G$.
+\end{enumerate}
+\begin{rk}
+    The map $\text{Ad}:G\to GL_n(\mathfrak{g})$ is called the \textbf{adjoint representation of $G$ on $\mathfrak g$} given as $a\mapsto d(L_a\circ R_{a^{-1}})_e$. We note that $L_a\circ R_{a^{-1}}(e) = e$, so its derivative is a map $T_eG \to T_eG$ where $T_eG = \mathfrak{g}$ by definition. Since conjugation is a Lie group isomorphism, then its derivative is a Lie algebra isomorphism. Therefore, indeed, $\text{Ad }a\in GL(\mathfrak{g})$.
+\end{rk}
+\nl
+Equivalently, is $\w$ satisfies the first condition, then, letting $H(p) = \ker\w_p$ (the horizontal distribution), then $\w$ satisfies the second condition if and only if $(R_a)_*H = H$ for all $a\in G$. In other words, we have that $H$ is an 
+\nl
+The curvature form $\Omega$ of the connection $\w$ is a $\mathfrak{g}$-valued 2-form defined by $\Omega(X,Y) = d\w(X,Y) + [\w(X),\w(Y)]$ where $[\cdot,\cdot]$ is the Lie bracket on $\mathfrak{g}$.
+\nl
+\subsection{Vector bundles associated to a principal $G$-bundle via a representation of $G$}
+Let $V$ be a vector space over $\mathbb K \in \{\R,\C\}$ and let $\rho: G\to GL(V)$ be a representation. In this context, $V$ is called a $G$-module. Then one can define a vector bundle $E = P\times_G V$ as a quotient of $P\times V$ as the set of equivalence classes under the following relation: $(p,v)\sim (R_a p,\rho(a^{-1})v)$ for an $a\in G$.
+\begin{ex}
+    Let $E = \mathcal{F}(M)\times_{GL_n(\mathbb K)}\mathbb K^n$. In this case, $\rho$ is the standard action of $GL_n(\mathbb K)$ over $\mathbb K^n$, ($\rho(a)w = aw$). $(q,L,w)\sim (q,L\circ a, a^{-1}w) = (q,\tilde L,\tilde w)$. Then we see that $Lw = \tilde L \tilde w$ is a well-defined element of $T_qM$ on the equivalence class. Vice versa, if, for $(q,L,w), (q,\tidle L, \tilde w)$, $\tilde L\tidle w$, then $\tilde w = \tilde L^{-1}\circ L w$. So if $a = L^{-1}\circ \tilde L$, then $(q,\tilde L, \tilde w) = (q, La, a^{-1} w)\sim (q, L,w)$, so by before, $Lw = \tilde L\tilde w$. Hence, we have an isomorphism $(q,L,w)\mapsto Lw$. Therefore, $E\cong TM$.
+\end{ex}
+\begin{ex}
+    Assume that $\rho: U(1)\to GL_n(\C)$ such that $\rho(e^{i\theta}) = e^{i\theta}I$. Then $(M\times S^1)\times_{U(1)}\C^n\cong M\times \C^n$ given by the isomorphism $(q,e^{i\theta},w)\mapsto (q,e^{i\theta}w)$
+\end{ex}
+\subsection{The affine connection on $P\times_G V$ induced by a principal connection on $P$}
+A representation $\rho: G\to GL(V)$ induces a representation on the Lie algebra $\rho: \mathfrak{g}\to \mathfrak{gl}(V))$ given by $D_\rho(X) = \frac{d}{dt}\rho(\exp(tX))\big|_{t=0}$. If a principal connection on $P$ is given by a $\mathfrak{g}$-valued form $\w$ and $s$...Missing a bit
+\nl
+If $\tidle s$ is another local seciton of $p$ and $U$ is a common domain of $s$ and $\tilde s$, then there exists a unique $a:U\to G$ such that $\tilde s = R_a s$ and $\tilde s^*(\rho\circ \w) = \rho(a)^{-1}s^*(\rho\circ\w)\rho(a)+ \rho(a)^{-1}d\rho(a)$. This gives the same transformation as for a connection on the vector bundle associated to a local frame.
+\nl
+Therefore, there exists a unique affine connection $\nabla$ on $E = P\times_G V$ such that $s^*(\rho\circ \w)$ is its connection form with respect to the frame such that at $q$, it is equal to the equivalence classes of $(q,s(q),e_1),\dots,(q,s(q),e_n)$ where $(e_1,\dots, e_n)$ is a fixed basis.
+\nl
+some things here that I don't understand
+\nl
+and the curvature form of thhis connection (with respect to the chosen frame) is equal to $F= s^*\rho\circ \Omega$ where $\Omega$ is the curvature form of the connection on the principle bundle. $\tilde F = \rho(a)^{-1}F\rho(a)$.
+\nl
+$F_q\in \Lambda^2T_q^*M\otimes \rho(\mathfrak g)\subseteq \Lambda^2T_q^*M\otimes \mathfrak{gl}(V)$.
+\subsection{Twisted differential}
+Let $E$ be a vector bundle with affine connection $\nabla$, let $\Omega^p(E)$ be the space of $p$-forms with value in $E$. $w\in \Omega^p(E)$ is a section of a vector bundle with fiber $\Lambda^pT_q^*M\otimes E_q$ over $q$ where $E_q$ is a fiber over $q$. Then one can define a twisted differential $d^\nabla:\Omega^p(E)\to \Omega^{p+1}(E)$  such that if $u\in \Omega^0(E)$, then $d^\nabla u = \nabla u\in \Omega^1(E)$ and extended to higher-order forms by the antiderivative rule. Equivalently, we find
+\[d^\nabla\w(X_0,\dots, X_p):=\sum_i (-1)^i\nabla_{X_i}\w(X_0,\dots,\hat{X}_i, \dots, X_p) + \sum_{i<j}(-1)^{i+j}\w([X_i,X_j],X_0,\dots, \hat{X}_i,\dots, \hat X_j,\dots X_p)\]
+For usual scalar0valued forms (i.e. if $E = M\times \R)$ we et the usual coordinate-free definition of exterior differential (replace $\nabla_X$ by $D_X$
+FILL IN STUFF AT THE END
+\end{document}

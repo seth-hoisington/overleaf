@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{September 14, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+
+\begin{document}
+
+\maketitle
+\section{Recall: The Lorentz boost along $x_1$-axis}
+\[\left\{\begin{aligned}
+    c\tilde{t}&=\frac{\frac{y}{c}x_1 + ct}{\sqrt{1-\frac{u^2}{c^2}}}\\
+    \tilde{x}_1&=\frac{x_1+\frac{u}{c} (ct)}{\sqrt{1-\frac{u^2}{c^2}}}\\
+    \tilde{x}_2&= x_2\\
+    \tilde{x}_3&= x_3
+\end{aligned}\right.\Rightarrow \left\{\begin{aligned}
+    \frac{\tilde E}{c}&=\frac{\frac{u}{c}p_1 + \frac{E}{c}}{\sqrt{1-\frac{u^2}{c^2}}}\\
+    \tilde{p}_1&=\frac{p_1+\frac{u}{c} \frac{E}{c}}{\sqrt{1-\frac{u^2}{c^2}}}\\
+    \tilde{p}_2&= p_2\\
+    \tilde{p}_3&= p_3
+\end{aligned}\right.\]
+\section{More about 4-vectors and 4-tensors}
+We work in $\R^4$ with coordinates $(x^0 = ct,x^1, x^2, x^3)$. This space is called Minkowski space-time. The Lorentzian is defined by $\Delta\ell^2  = (\nabla x^0)^2 - (\nabla x^1)^2 - (\nabla x^2)^2-(\nabla x^3)^2$. Let 
+\[(g_{\mu v})=\begin{pmatrix}
+    1 & 0 & 0 &0\\
+    0& -1 & 0 & 0\\
+    0& 0 & -1 & 0\\
+    0& 0 & 0 & -1
+\end{pmatrix}\]
+Then, $(\Delta\ell)^2 = \sum_{\mu,\nu}g_{\mu \nu}\Delta x^\mu \Delta x^\nu = $. The indefinite inner product
+\[a\cdot\hat a = a^0\hat a^0-a^1\hat a^1- a^2\hat a^2-a^3\hat a^3\]
+The linear transformation which preserves the Lorentzian inner product are called Lorentzian transformations, and are all of the form $x^\mu\mapsto \tilde x^\mu = \sum_{\nu=0}^3 a^\mu_\nu x^\nu$. $H$ is Lorentzian if and only if $a_\rho (g_{\mu\nu})a_\sigma=\sum_{\mu,\nu}g_{\mu \nu} a^\mu_\rho a^\nu_\sigma = g_{\rho\sigma}$. It follows from this fact that if $a_\mu$ is a column vector of the matrix $(a_\mu^\nu)$, then
+\[a_0\cdot a_0 = 1,  a_\rho\cdot a_\rho = -1\quad\text{for $\mu = 1,2,3$, and for $\rho\neq \sigma$}\quad a_\rho\cdot a_\sigma = 0.\]
+The set of all such Lorentz transformations forms a Lie group, called the Lorentz group, $O(1,3)$. In the last lecture, we saw that coordinate transformations between two inertial frames $K$ and $K'$ where the later is moving along the3 $x^1$-axis of the former with velocity $u$ are described by Lorentz transformations when they preserve the origin (i.e. $(0,0)\mapsto (0,0)$). Therefore, the most general space-time coordinate transforms are affine transforms such that the linear part is Lorentzian. Transformations of this more general type are called \textbf{Poincare transformations} and the form a Lie group called the Poincare group.
+\begin{defn}
+    A \textbf{4-vector} is any 4-component quantity $(A_0,A_1,A_2,A_3)$ depending on an inertial frame such that when passing to another inertial frame $\tilde K$ via a Poincar\'e transform, it transforms as $A^\mu\to \tilde A^\mu = \sum^3_{\nu=0}a^\mu_\nu A^\nu$.
+\end{defn}
+It can be asked why it is appropriate to use the above definition as opposed to the standard, more general 4-vector as defined linear-algebraically. In this definition, care is taken to allow for the quantity labelled the 4-vector to be viewed in any inertial frame. This definition is useful since special relativity requires us to view all inertial frames equally, so all relevant four-component quantities in this context should be 4-vectors under this definition. A prime example of a 4-vector is given by the relativistic 4-momentum/energy-momentum vector $\left(\frac{E}{c},p\right) = \left(\frac{E}{c},p_1,p_2,p_3\right)$ as discussed in the previous lecture. Similarly, one can define a 4-covector and more generally the notion of 4-tensors of type $(k,\ell)$. To do so, we use the lowering-index convention: $(g^{\lambda\rho})_{\lambda,\rho=0}^3 = (g_{\mu\nu})^{-1}$.
+\begin{defn}
+    A \textbf{4-covector} is any 4-component quantity $(A_0,A_1,A_2,A_3)$ such that $A_\mu\mapsto \tilde A_\mu = \sum_{\nu = 0}^3 a_\mu^\nu A_\nu$ for a Lorentz transformation $(a_{\mu}^\nu)$
+\end{defn}
+\begin{rk}
+    If $(A^\mu)_{\mu=0}^3$ is a 4-vector, then $A_\mu = \sum_{\nu=0}^3g_{\mu\nu}A^\nu$ is a 4-covector. To see this, we observe that $A^\nu = \sum_{\rho =0}^3 g^{\nu\rho}A_\rho$. Thus,
+    \[\tilde A_\mu =\sum_{\nu =0}^3 g_{\mu\nu}\tilde A^\nu = \sum_{\nu,\lambda =0}^3g_{\mu\nu}a^\nu_\lambda A^\lambda = \sum_{\nu, \lambda,\rho=0}^3g_{\mu\nu}g^{\lambda\rho}a^\nu_\lambda A_\rho.\]
+    Noting that $(a^\lambda_\rho)^{-1} = (g_{\mu\nu})(a_{\lambda\rho})(g^{\mu\nu})$, we have that $\tilde{A}_\mu = \sum_{\nu=0}^3 ((a^{\sigma}_\tau)^{-1})_{\mu}^\rho A_\rho$. Furthermore, from the form of $g$, we have that $(A_0,A_1,A_2,A_3) = (A^0,-A^1,A^2,-A^3)$. 
+\end{rk}
+Geometrically, a covector is an element of the dual space of the Minkowski space, and the Lorentzian inner product identifies a vector space with its dual via the lowering index operation: $A_\mu = \sum_{\nu=0}^3g_{\mu\nu}A^\nu$. More generally, given nonnegative integers $k$ and $\ell$, a tuple
+\[\left(A^{\mu_1,\dots,\mu_k}_{\nu_1,\dots,\nu_\ell}\right),\quad{\begin{aligned}
+    &0\leq \mu_i\leq 3, &1\leq i\leq k\\
+    &0\leq \nu_i\leq 3, &1\leq j\leq \ell
+\end{aligned}}\]
+is called a $(k,\ell)$-tensor if under the transformation $x_\mu\mapsto \sum_{\nu = 0}^3 a^\mu_\nu x_\nu + b^\mu$ between two inertial frames, it transforms as follows:
+\[\left(\tilde{A}^{\mu_1,\dots,\mu_k}_{\quad\quad\nu_1,\dots,\nu_\ell}\right) = \sum_{0\leq \sigma_1,\dots,\sigma_k,\rho_1\dots,\rho_\ell\leq 3} (a^{\mu_1}_{\sigma_1}\cdots a^{\mu_k}_{\sigma_k}\left((a^{\al}_{\be})^{-1}\right)_{\nu_1}^{\rho_1}\cdots \left((a^{\al}_{\be})^{-1}\right)_{\nu_\ell}^{\rho_\ell}A^{\mu_1,\dots,\mu_k}_{\nu_1,\dots,\nu_\ell},\]
+This generalizes the previous notion, as 4-vectors are given by $k=1$ and $\ell = 0$, and likewise, 4-covectors are given by $k=0$ and $\ell =1$.
+\begin{ex}
+    Relativistic Angular Momentum
+\end{ex}
+The Lagrangian for relativistic a free particle is $L = -mc^2\sqrt{1-\frac{v^2}{c^2}}$ is Lorentz-invariant. So in the context of Noether's theorem, the Lorentz group can be a source of symmetries for our Lagrangian. More concretely, we can produce six independent first integrals given that we can define six linearly independent one-parameter subgroups which act as symmetries for four-vectors (as $6 = \dim SO^+(1,3)$). The Lagrangian is autonomous, but we can still define symmetries of space-time per Problem 2 on Homework 1. Considering rotations in the three spatial coordinates, we may define an analogous angular-momentum quantity. Recall that for a position vector $\vec x$ and a (classical) momentum $\vec p$, we have $\vec L = \vec x\times \vec p$. Replacing the classical momentum with the relativistic momentum $\vec p = M(v)\vec v = \frac{m}{\sqrt{1-\frac{|v|^2}{c^2}}}\vec v$ gives us three integrals of motion since the relativistic momentum is conserved. Additionally, since the 4-vector $\left(\frac{E}{c}, \vec p\right)$ is conserved under the Lorentz boost, we may define three integrals of motion as the three components of the vector $\vec N = \vec p t - \frac{E}{c^2}\vec x$ (\textbf{Exercise}). Multiplying those components by $c$, we may write all six integrals of motion as the following bivector ($(2,0)$-tensor):
+\[L = (ct,\vec x)\wedge \left(\frac{E}{c},\vec p\right) = \left(\begin{array}{c|ccc}
+     0 & -N^1c & -N^2c & -N^3c \\
+     \hline
+     -N^1c & 0 & L^{12} & -L^{31}\\
+     -N^2c & -L^{12} & 0 & L^{23}\\
+     -N^3c & L^{31} & -L^{23} & 0
+\end{array}\right),\]
+where $\vec L = (L^{23},L^{31},L^{12})$ is the space-only relativistic momentum and $\vec N = (N^1,N^2,N^3)$ is the integrals from the Lorentz boost. Thinking of the left 4-vector as the space-time analogue of the position vector, and given the right 4-vector's status as the space-time analogue of momentum, (and that $\wedge = \times$ in three dimensions) it is natural to define this quantity as the relativistic angular momentum.
+% The generators of rotations $\rightarrow$ 3 components of angular momentum. The generators of Lorentzian $\rightarrow$ 3 additional first integrals which are components of $\vec p t - \frac{E}{c^2}\vec x$ which gives us, up to a multiplication by $c$: $(ct,\vec x)\wedge (\frac{E}{c},\vec p)\in \bigwedge^2V$ (it is a $(2,0)$-vector).
+\nl
+\textbf{Note:} I have moved the introductory discussion on classical field theory to Lecture 10 for the sake of organization.
+\end{document}

@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\posRcl}{{\mathbb R}_{\geq 0}}
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\curlyL}{\mathcal L}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nl}{\newline\newline\noindent}
+\newcommand{\cpt}{[0,1]}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\yv}{\vec{y}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\topo}{{T}}
+\newcommand{\vhi}{\varphi}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\sgn}{\text{sgn}}
+\newcommand{\w}{\omega}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pdof}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\bigslant}[2]{\left.\raisebox{.1em}{$#1$}\middle/\raisebox{-.15em}{$#2$}\right.}
+\newcommand{\Int}{\text{Int}}
+\newcommand{\im}{\text{im}\,}
+\newcommand{\Hopf}{\text{Hopf}\,}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\title{MATH 689 - Physics for Mathematicians, Lecture 11}
+\author{Lectures by Igor Zelenko, transcribed by Seth Hoisington}
+\date{September 28, 2023}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{ex}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{rk}{Remark}
+
+\begin{document}
+
+\maketitle
+
+\section{Maxwell's Equations}
+From last time, we have the formulation
+\[\left\{\begin{aligned}
+    dF &= 0\\ 
+    d^*F &= 4\pi j 
+\end{aligned}\right.\]
+If we see $F$ a s a 2-form, then this is defines a Lorentz-invariant Lagrangian for the electromagnetic field. We want to construct an action depending on the electromagnetic potential form $A$ (where $dA = -F$) such that $d^*F = 4\pi j$ is the Euler-Lagrange equation.
+\nl
+Since this relation is linear in $F$, we expect the Lagrangian density to be quadratic in $F$. Consider
+\[L(A) = -\frac{1}{2}g(dA,dA) - 4\pi g(j,A) = -\frac{1}{2}\|F\|^2  - 4\pi g(j,A)\]
+where the inner product on $\Lambda^2(\R^{4*})$ is induced by the Lorentz inner product on $\R^4$. If $A^s$ is a variation of $A$ (i.e. $A^s$ is defined on $\Omega$, and $A|_{\partial\Omega} = A^0$) such that $A^0 = 0$ and $h = \frac{d}{ds}A^s\big|_{s=0}$, then recalling the action definition, we have that
+\begin{align*}
+    \frac{d}{ds}\int_\Omega L(A^s)\bigg|_{s=0}dx &= \int_\Omega\pd{s}\left[ -\frac{1}{2}g(dA,dA) - 4\pi g(j,A)\right]\bigg|_{s=0}dx\\
+    &=\int_\Omega g(dA,dh) - 4\pi g(j,h)dx\\
+    &= \int_\Omega g(d^*dA,h) - 4\pi g(j,h)dx \\
+    &=\int_Omega g\left(d^*F - 4\pi j, h\right)dx\\
+    &= 0.
+\end{align*}
+Since $h$ is arbitrary, we must have $d^*F = 4\pi j$. In coordinates, we have
+\[F = \sum_{\mu<\nu} F_{\mu\nu} dx^\mu\wedge dx^\nu,\]
+so $g(F,F) = \sum_{\mu<\nu}\frac{1}{2}F_{\mu\nu}F^{\mu\nu}$. Hence, in coordinates,
+\[L =\sum_{\nu = 1}^4 -\frac{1}{4}\sum_{\mu<\nu}\left[F_{\mu\nu}F^{\mu\nu}\right] - 4\pi A_\nu j^\nu\]
+\section{Lagrangian for a particle in an electromagnetic field}
+Take a particle $q$ in an electromagnetic field $\vec E, \vec B$. Then we want to find the the Lagrangian such that E-L equation is given by 
+\[\frac{d}{dt}p_k = F_{Lorenz} = qE + \frac{q}{c}v\times B\]
+where $p_k$ is the (kinetic) momentum of a relativistic particle:
+\[p+k = \frac{mv}{\sqrt{1-\frac{|v|^2}{c^2}}}\]
+We end up with
+\[L = -mc^2 \sqrt{1-\frac{|v|^2}{c^2}} - \frac{q}{c}\sum_\mu A_\mu \frac{dx^\mu}{dt}\]
+where $x^0 = ct, \frac{dx^0}{dt} = c$. If $p$ is the conjugate momentum, 
+\[p = \grad_vL = p_k + \frac{q}{c}A,\]
+so $p_k = p - \frac{q}{c}A$. For a free relativistic particle, the energy-momentum 4-vector $(\frac{\vec E}{c},\vec p)$. For a particle in an electromagnetic field, the energy-momentum vector satisfies
+\[(\frac{\vec E}{c},\vec p) - frac{q}{c}(A^\mu)_{\mu = 0}^3.\]
+\section{Electromagnetism as an example of a gauge/Yang-Mills field}
+Let $\pi:E\to M$ be a vector bundle of rank $r$ over $M$ with an affine connection. A vector bundle satisfies a set of local trivality conditions which for our purposes imply the following: For any sufficiently small neighborhood $U\subseteq M$, then for all $q\in U$, there exists a basis $(e_1(q),\dots, e_r(q))$ of the fiber $E_q = \pi^{-1}(q)$, then the dependence $q \mapsto (e_1(q),\dots, e_r(q))$ is smooth. In particular, this gives us a local smooth frame on the bundle (a smooth frame on $\pi^{-1}U$). For a vector field $X$, the connection $\nabla$ is given by $\nabla_X e_j = \sum_{i}A^i_j(X)e_i$ where $A = (A^i_j)_{i,j=1}^r$ for $A^i_j$ 1-forms. Then, $A$ is a $\mathfrak{gl}_r(\R)$-valued $1$-form associated with the smooth frame $(e_1,\dots,e_n)$. Let $\Omega^i_j = dA^i_j + A^i_k\wedge A^k_j$. Then $\Omega = (\Omega)_{i,j=1}^r$ is a $\mathfrak{gl}_r(\R)$-valued $1$-form known as the curvature form of the connection $\nabla$. More succinctly, $\Omega = dA + A\wedge A$. A gauge transformation is a bundle map which preserves the fibers. Equivalently, a gauge transformation is preserved under a change of local frame.
+\nl
+If we take a gauge transformation sending the local frame $e$ to another moving frame  given by $\tilde e_j =. \sum_i b_j^i e_i$, for $(b^i_j)_{i,j=1}^r\in GL_r(\R)$, then if $\tilde A$ is a connection form associated with $\tilde e$ (i.e. $\nabla \tilde e_j = \sum_i \tilde A^i_j \tilde e_j$), then $\tilde A = b^{-1}Ab + b^{-1} db$ where $\tilde Omega = b^{-1}\Omega b$.
+\nl
+In our case, we take $r = 1$, and let $e$ be a local frame (more exactly,  $\{e\}$ is a local frame for $E$). Then we have that $GL_r(\R) = \R^*$ and $\mathfrak{gl}_r(\R) = \R$. The gauge transformation $\tilde e = be$ where $b$ is an invertible scalar function on $M$. Then the electromagnetic potential is given by
+\[\tilde A = b^{-1}Ab + b^{-1}db.\]
+If we let $b = \exp(f)$, (i.e. $f = \ln(b)$), then $b^{-1}db = \exp{-f}d(\exp(f)) = \exp{-f}\exp(f)df  = df$.
+\end{document}
